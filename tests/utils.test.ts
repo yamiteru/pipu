@@ -5,6 +5,7 @@ import {
   divide,
   eq,
   filter,
+  flip,
   gt,
   gte,
   has,
@@ -161,5 +162,9 @@ describe("Methods", () => {
 
     expect(hasName({})).toBe(undefined);
     expect(hasName(user)).toBe(user);
+  });
+
+  test("flip", () => {
+    expect(flip([1, 2])).toStrictEqual([2, 1]);
   });
 });

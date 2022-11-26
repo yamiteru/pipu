@@ -7,6 +7,7 @@ import {
   filter,
   gt,
   gte,
+  has,
   ifElse,
   increment,
   lt,
@@ -152,5 +153,13 @@ describe("Methods", () => {
     const callAtZero = call("at", 0);
 
     expect(callAtZero([1, 2, 3])).toBe(1);
+  });
+
+  test("has", () => {
+    const hasName = has("name");
+    const user = { name: "yamiteru" };
+
+    expect(hasName({})).toBe(undefined);
+    expect(hasName(user)).toBe(user);
   });
 });

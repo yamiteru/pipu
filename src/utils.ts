@@ -75,3 +75,6 @@ export const has = <K extends string>(key: K) =>
 
 // Flips array order
 export const flip = call("reverse");
+
+// Flattens array
+export const flatten = call("flat");

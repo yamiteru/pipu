@@ -1,5 +1,5 @@
 {
-  "name": "ts-package",
+  "name": "pipem",
   "version": "1.0.0",
   "scripts": {
     "fix:format": "prettier --write \"**/*.ts\"",

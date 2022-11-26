@@ -1,4 +1,5 @@
 import {
+  append,
   at,
   call,
   decrement,
@@ -176,5 +177,9 @@ describe("Methods", () => {
 
   test("prepend", () => {
     expect(prepend(0)([1, 2])).toStrictEqual([0, 1, 2]);
+  });
+
+  test("append", () => {
+    expect(append(3)([1, 2])).toStrictEqual([1, 2, 3]);
   });
 });

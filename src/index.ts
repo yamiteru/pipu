@@ -1,1 +1,2 @@
-export const add = (...n: number[]) => n.reduce((acc, v) => acc + v, 0);
+export * from "./pipe";
+export * from "./methods";

@@ -21,6 +21,7 @@ import {
   neq,
   plus,
   prepend,
+  regex,
   tap,
   toFloat,
   toInt,
@@ -181,5 +182,12 @@ describe("Methods", () => {
 
   test("append", () => {
     expect(append(3)([1, 2])).toStrictEqual([1, 2, 3]);
+  });
+
+  test("regex", () => {
+    const numberRegex = regex(/^[0-9]+$/);
+
+    expect(numberRegex("hello")).toBe(undefined);
+    expect(numberRegex("123")).toBe("123");
   });
 });

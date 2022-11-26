@@ -19,6 +19,7 @@ import {
   multiply,
   neq,
   plus,
+  prepend,
   tap,
   toFloat,
   toInt,
@@ -171,5 +172,9 @@ describe("Methods", () => {
 
   test("flatten", () => {
     expect(flatten([[1, 2], [3]])).toStrictEqual([1, 2, 3]);
+  });
+
+  test("prepend", () => {
+    expect(prepend(0)([1, 2])).toStrictEqual([0, 1, 2]);
   });
 });

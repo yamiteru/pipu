@@ -86,3 +86,7 @@ export const prepend = <T>(value: T) =>
 // Adds value at the end of an array
 export const append = <T>(value: T) =>
   map<T[]>((v) => [...v, value]);
+
+// Matches pattern inside a string
+export const regex = (pattern: RegExp) =>
+  filter<string>((v) => pattern.test(v));

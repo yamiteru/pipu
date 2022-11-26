@@ -5,6 +5,7 @@ import {
   divide,
   eq,
   filter,
+  flatten,
   flip,
   gt,
   gte,
@@ -166,5 +167,9 @@ describe("Methods", () => {
 
   test("flip", () => {
     expect(flip([1, 2])).toStrictEqual([2, 1]);
+  });
+
+  test("flatten", () => {
+    expect(flatten([[1, 2], [3]])).toStrictEqual([1, 2, 3]);
   });
 });

@@ -72,3 +72,6 @@ export const call =
 
 export const has = <K extends string>(key: K) =>
   filter<Record<string | K, unknown>>((v) => key in v);
+
+// Flips array order
+export const flip = call("reverse");

@@ -1,2 +1,2 @@
 export * from "./pipe";
-export * from "./methods";
+export * from "./utils";

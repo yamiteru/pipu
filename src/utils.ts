@@ -78,3 +78,7 @@ export const flip = call("reverse");
 
 // Flattens array
 export const flatten = call("flat");
+
+// Adds value at the beginning of an array
+export const prepend = <T>(value: T) =>
+  map<T[]>((v) => [value, ...v]);

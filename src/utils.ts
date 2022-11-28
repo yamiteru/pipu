@@ -130,3 +130,17 @@ export const values = <
 export const keys = <
 	T extends Record<string, unknown>
 >(obj: T) => map((v: T) => Object.keys(v))(obj);
+
+// Returns the input object with only the specified keys
+export const pick = <
+	T extends string[]
+>(keys: T) => map((v: Record<string, unknown>) => {
+	const res: Record<string, unknown> = {};	
+
+	for(let i = 0; i < keys.length; ++i) {
+		const k = keys[i];
+		res[k] = v[k];
+	}
+
+	return res;
+});

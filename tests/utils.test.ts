@@ -1,4 +1,5 @@
 import {
+    all,
   append,
   at,
   both,
@@ -212,4 +213,16 @@ describe("Methods", () => {
     expect(isAlive(-10)).toBe(undefined);
     expect(isAlive(25)).toBe(25);
   });
+
+	test("all", () => {
+		const isStrongPassword = all<string>(
+			(v) => v.length >= 8,
+			(v) => v.includes("strong"),
+			(v) => v.includes("_"),
+			(v) => v.endsWith("123456")
+		);
+
+		expect(isStrongPassword("yoyoyoyoyo")).toBe(undefined);
+		expect(isStrongPassword("strong_123456")).toBe("strong_123456");
+	});
 });

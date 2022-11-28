@@ -24,6 +24,7 @@ import {
   minus,
   multiply,
   neq,
+  omit,
   pick,
   plus,
   prepend,
@@ -267,6 +268,16 @@ describe("Methods", () => {
 		})).toStrictEqual({
 			a: 1,
 			b: 2
+		});
+	});
+
+	test("omit", () => {
+		expect(omit(["a", "b"])({
+			a: 1,
+			b: 2,
+			c: 3
+		})).toStrictEqual({
+			c: 3
 		});
 	});
 });

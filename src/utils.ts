@@ -90,3 +90,9 @@ export const append = <T>(value: T) =>
 // Matches pattern inside a string
 export const regex = (pattern: RegExp) =>
   filter<string>((v) => pattern.test(v));
+
+// Passes if either one of the predicates returns true
+export const either = <T>(
+  p1: (data: T) => boolean,
+  p2: (data: T) => boolean
+) => filter<T>((v) => p1(v) || p2(v));

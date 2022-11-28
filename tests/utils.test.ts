@@ -17,6 +17,7 @@ import {
   has,
   ifElse,
   increment,
+  keys,
   lt,
   lte,
   map,
@@ -245,5 +246,15 @@ describe("Methods", () => {
 		})).toStrictEqual(
 			[1, 2]
 		);
+	});
+
+	test("keys", () => {
+		expect(keys({
+			function: "add",
+			props: [1, 2]
+		})).toStrictEqual([
+			"function",
+			"props"
+		]);
 	});
 });

@@ -1,6 +1,7 @@
 import {
   append,
   at,
+  both,
   call,
   decrement,
   divide,
@@ -200,5 +201,15 @@ describe("Methods", () => {
 
     expect(isGoodDrink("tea")).toBe("tea");
     expect(isGoodDrink("beer")).toBe(undefined);
+  });
+
+  test("both", () => {
+    const isAlive = both<number>(
+      (v) => v >= 0,
+      (v) => v <= 150
+    );
+
+    expect(isAlive(-10)).toBe(undefined);
+    expect(isAlive(25)).toBe(25);
   });
 });

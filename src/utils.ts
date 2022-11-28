@@ -144,3 +144,18 @@ export const pick = <
 
 	return res;
 });
+
+// Returns the input objects without the specified keys
+export const omit = <
+	T extends string[]
+>(keys: T) => map((v: Record<string, unknown>) => {
+	const res: Record<string, unknown> = {};
+
+	for(const k in v) {
+		if(!keys.includes(k)) {
+			res[k] = v[k];
+		}
+	}
+
+	return res;
+});

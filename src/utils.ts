@@ -121,3 +121,7 @@ export const entries = <
 	T extends Record<string, unknown>
 >(obj: T) => map((v: T) => Object.entries(v))(obj);
 
+// Returns object values
+export const values = <
+	T extends Record<string, unknown>
+>(obj: T) => map((v: T) => Object.values(v))(obj);

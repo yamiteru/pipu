@@ -7,6 +7,7 @@ import {
   decrement,
   divide,
   either,
+  entries,
   eq,
   filter,
   flatten,
@@ -224,5 +225,15 @@ describe("Methods", () => {
 
 		expect(isStrongPassword("yoyoyoyoyo")).toBe(undefined);
 		expect(isStrongPassword("strong_123456")).toBe("strong_123456");
+	});
+
+	test("entries", () => {
+		expect(entries({
+			name: "yamiteru",
+			age: 25
+		})).toStrictEqual([
+			["name", "yamiteru"],
+			["age", 25]
+		]);
 	});
 });

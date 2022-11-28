@@ -24,6 +24,7 @@ import {
   minus,
   multiply,
   neq,
+  pick,
   plus,
   prepend,
   regex,
@@ -256,5 +257,16 @@ describe("Methods", () => {
 			"function",
 			"props"
 		]);
+	});
+
+	test("pick", () => {
+		expect(pick(["a", "b"])({
+			a: 1,
+			b: 2,
+			c: 3
+		})).toStrictEqual({
+			a: 1,
+			b: 2
+		});
 	});
 });

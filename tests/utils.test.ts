@@ -4,6 +4,7 @@ import {
   call,
   decrement,
   divide,
+  either,
   eq,
   filter,
   flatten,
@@ -189,5 +190,15 @@ describe("Methods", () => {
 
     expect(numberRegex("hello")).toBe(undefined);
     expect(numberRegex("123")).toBe("123");
+  });
+
+  test("either", () => {
+    const isGoodDrink = either<string>(
+      (v) => v === "tea",
+      (v) => v === "coffee"
+    );
+
+    expect(isGoodDrink("tea")).toBe("tea");
+    expect(isGoodDrink("beer")).toBe(undefined);
   });
 });

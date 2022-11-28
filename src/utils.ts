@@ -96,3 +96,9 @@ export const either = <T>(
   p1: (data: T) => boolean,
   p2: (data: T) => boolean
 ) => filter<T>((v) => p1(v) || p2(v));
+
+// Passes if both of the predicates return true
+export const both = <T>(
+  p1: (data: T) => boolean,
+  p2: (data: T) => boolean
+) => filter<T>((v) => p1(v) && p2(v));

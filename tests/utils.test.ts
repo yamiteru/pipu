@@ -30,6 +30,7 @@ import {
   toFloat,
   toInt,
   toString,
+  values,
 } from "../src";
 
 describe("Methods", () => {
@@ -235,5 +236,14 @@ describe("Methods", () => {
 			["name", "yamiteru"],
 			["age", 25]
 		]);
+	});
+
+	test("values", () => {
+		expect(values({
+			one: 1,
+			two: 2
+		})).toStrictEqual(
+			[1, 2]
+		);
 	});
 });

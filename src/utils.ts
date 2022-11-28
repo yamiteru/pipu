@@ -102,3 +102,16 @@ export const both = <T>(
   p1: (data: T) => boolean,
   p2: (data: T) => boolean
 ) => filter<T>((v) => p1(v) && p2(v));
+
+// Passes if all of the predicates return true
+export const all = <T>(
+	...ps: ((data: T) => boolean)[]
+) => filter<T>((v) => {
+	for(let i = 0; i < ps.length; ++i) {
+		if(ps[i](v) === false) {
+			return false;
+		}
+	}
+
+	return true;
+});

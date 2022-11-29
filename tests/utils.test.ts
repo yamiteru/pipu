@@ -26,6 +26,7 @@ import {
   multiply,
   neq,
   omit,
+  or,
   pick,
   plus,
   prepend,
@@ -290,5 +291,15 @@ describe("Methods", () => {
 		
 		expect(isAdult(7)).toBe(undefined);
 		expect(isAdult(25)).toBe(25);
+	});
+
+	test("or", () => {
+		const isAlive = or<number>(
+			(v) => v >= 0,
+			(v) => v <= 150
+		);
+
+		expect(isAlive(-10)).toBe(undefined);
+		expect(isAlive(10)).toBe(undefined);
 	});
 });

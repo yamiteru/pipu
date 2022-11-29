@@ -1,5 +1,6 @@
 import {
     all,
+  and,
   append,
   at,
   both,
@@ -279,5 +280,15 @@ describe("Methods", () => {
 		})).toStrictEqual({
 			c: 3
 		});
+	});
+
+	test("add", () => {
+		const isAdult = and<number>(
+			(v) => v >= 18,
+			(v) => v <= 150 
+		);
+		
+		expect(isAdult(7)).toBe(undefined);
+		expect(isAdult(25)).toBe(25);
 	});
 });

@@ -160,12 +160,23 @@ export const omit = <
 	return res;
 });
 
-// Returns true if all predicates return true
+// Returns input value if all predicates return true
 export const and = <T>(
 	...ps: ((data: T) => boolean)[]
 ) => filter<T>((v) => {
 	for(let i = 0; i < ps.length; ++i) {
 		if(!ps[i](v)) return false; 
+	}
+
+	return true;
+});
+
+// Returns input value if at least one predicate returns true
+export const or = <T>(
+	...ps: ((data: T) => boolean)[]
+) => filter<T>((v) => {
+	for(let i = 0; i < ps.length; ++i) {
+		if(!ps[i](v)) return false;
 	}
 
 	return true;

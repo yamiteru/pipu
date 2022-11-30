@@ -9,7 +9,7 @@ const config = {
   title: 'Pipem',
   tagline: 'Async, abortable and composable pipe with a bunch of helpful utils.',
   url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  baseUrl: '/pipem/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

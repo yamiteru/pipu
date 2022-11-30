@@ -38,7 +38,7 @@ jobs:
           node-version: '18.x'
           cache: 'pnpm'
 
-      - run: pnpm install
+      - run: pnpm install --no-frozen-lockfile
       - run: pnpm run build
 
       - name: Setup Pages

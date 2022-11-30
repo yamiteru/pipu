@@ -42,7 +42,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[utils.ts:107](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L107)
+[utils.ts:107](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L107)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[utils.ts:164](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L164)
+[utils.ts:164](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L164)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[utils.ts:87](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L87)
+[utils.ts:87](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L87)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[utils.ts:28](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L28)
+[utils.ts:28](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L28)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[utils.ts:101](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L101)
+[utils.ts:101](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L101)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[utils.ts:69](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L69)
+[utils.ts:69](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L69)
 
 ___
 
@@ -248,7 +248,7 @@ ___
 
 #### Defined in
 
-[utils.ts:10](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L10)
+[utils.ts:10](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L10)
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-[utils.ts:46](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L46)
+[utils.ts:46](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L46)
 
 ___
 
@@ -319,7 +319,7 @@ ___
 
 #### Defined in
 
-[utils.ts:95](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L95)
+[utils.ts:95](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L95)
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 #### Defined in
 
-[utils.ts:120](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L120)
+[utils.ts:120](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L120)
 
 ___
 
@@ -377,7 +377,7 @@ ___
 
 #### Defined in
 
-[utils.ts:64](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L64)
+[utils.ts:64](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L64)
 
 ___
 
@@ -415,7 +415,7 @@ ___
 
 #### Defined in
 
-[utils.ts:21](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L21)
+[utils.ts:21](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L21)
 
 ___
 
@@ -435,7 +435,7 @@ ___
 
 #### Defined in
 
-[utils.ts:70](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L70)
+[utils.ts:70](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L70)
 
 ___
 
@@ -455,7 +455,7 @@ ___
 
 #### Defined in
 
-[utils.ts:70](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L70)
+[utils.ts:70](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L70)
 
 ___
 
@@ -487,7 +487,7 @@ ___
 
 #### Defined in
 
-[utils.ts:58](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L58)
+[utils.ts:58](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L58)
 
 ___
 
@@ -519,7 +519,7 @@ ___
 
 #### Defined in
 
-[utils.ts:56](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L56)
+[utils.ts:56](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L56)
 
 ___
 
@@ -557,7 +557,7 @@ ___
 
 #### Defined in
 
-[utils.ts:73](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L73)
+[utils.ts:73](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L73)
 
 ___
 
@@ -599,7 +599,7 @@ ___
 
 #### Defined in
 
-[utils.ts:13](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L13)
+[utils.ts:13](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L13)
 
 ___
 
@@ -619,7 +619,7 @@ ___
 
 #### Defined in
 
-[utils.ts:10](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L10)
+[utils.ts:10](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L10)
 
 ___
 
@@ -645,7 +645,7 @@ ___
 
 #### Defined in
 
-[utils.ts:130](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L130)
+[utils.ts:130](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L130)
 
 ___
 
@@ -677,7 +677,7 @@ ___
 
 #### Defined in
 
-[utils.ts:62](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L62)
+[utils.ts:62](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L62)
 
 ___
 
@@ -709,7 +709,7 @@ ___
 
 #### Defined in
 
-[utils.ts:60](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L60)
+[utils.ts:60](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L60)
 
 ___
 
@@ -748,7 +748,7 @@ ___
 
 #### Defined in
 
-[utils.ts:10](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L10)
+[utils.ts:10](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L10)
 
 ___
 
@@ -780,7 +780,7 @@ ___
 
 #### Defined in
 
-[utils.ts:52](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L52)
+[utils.ts:52](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L52)
 
 ___
 
@@ -812,7 +812,7 @@ ___
 
 #### Defined in
 
-[utils.ts:44](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L44)
+[utils.ts:44](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L44)
 
 ___
 
@@ -844,7 +844,7 @@ ___
 
 #### Defined in
 
-[utils.ts:66](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L66)
+[utils.ts:66](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L66)
 
 ___
 
@@ -882,7 +882,7 @@ ___
 
 #### Defined in
 
-[utils.ts:149](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L149)
+[utils.ts:149](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L149)
 
 ___
 
@@ -920,7 +920,7 @@ ___
 
 #### Defined in
 
-[utils.ts:175](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L175)
+[utils.ts:175](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L175)
 
 ___
 
@@ -958,7 +958,7 @@ ___
 
 #### Defined in
 
-[utils.ts:135](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L135)
+[utils.ts:135](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L135)
 
 ___
 
@@ -985,7 +985,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:30](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L30)
+[pipe.ts:30](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L30)
 
 ▸ **pipe**<`A`, `B`, `C`\>(`ab`, `bc`): `PipeReturn`<`A`, `C`\>
 
@@ -1010,7 +1010,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:31](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L31)
+[pipe.ts:31](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L31)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`\>(`ab`, `bc`, `cd`): `PipeReturn`<`A`, `D`\>
 
@@ -1037,7 +1037,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:35](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L35)
+[pipe.ts:35](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L35)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`\>(`ab`, `bc`, `cd`, `de`): `PipeReturn`<`A`, `E`\>
 
@@ -1066,7 +1066,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:40](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L40)
+[pipe.ts:40](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L40)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`\>(`ab`, `bc`, `cd`, `de`, `ef`): `PipeReturn`<`A`, `F`\>
 
@@ -1097,7 +1097,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:46](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L46)
+[pipe.ts:46](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L46)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`): `PipeReturn`<`A`, `G`\>
 
@@ -1130,7 +1130,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:53](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L53)
+[pipe.ts:53](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L53)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`): `PipeReturn`<`A`, `H`\>
 
@@ -1165,7 +1165,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:61](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L61)
+[pipe.ts:61](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L61)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`): `PipeReturn`<`A`, `I`\>
 
@@ -1202,7 +1202,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:70](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L70)
+[pipe.ts:70](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L70)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`): `PipeReturn`<`A`, `J`\>
 
@@ -1241,7 +1241,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:80](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L80)
+[pipe.ts:80](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L80)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`): `PipeReturn`<`A`, `K`\>
 
@@ -1282,7 +1282,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:91](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L91)
+[pipe.ts:91](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L91)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`): `PipeReturn`<`A`, `L`\>
 
@@ -1325,7 +1325,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:103](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L103)
+[pipe.ts:103](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L103)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`): `PipeReturn`<`A`, `M`\>
 
@@ -1370,7 +1370,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:116](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L116)
+[pipe.ts:116](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L116)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`): `PipeReturn`<`A`, `N`\>
 
@@ -1417,7 +1417,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:130](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L130)
+[pipe.ts:130](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L130)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`): `PipeReturn`<`A`, `O`\>
 
@@ -1466,7 +1466,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:145](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L145)
+[pipe.ts:145](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L145)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`): `PipeReturn`<`A`, `P`\>
 
@@ -1517,7 +1517,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:161](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L161)
+[pipe.ts:161](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L161)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`): `PipeReturn`<`A`, `Q`\>
 
@@ -1570,7 +1570,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:178](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L178)
+[pipe.ts:178](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L178)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`): `PipeReturn`<`A`, `R`\>
 
@@ -1625,7 +1625,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:196](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L196)
+[pipe.ts:196](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L196)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`): `PipeReturn`<`A`, `S`\>
 
@@ -1682,7 +1682,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:215](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L215)
+[pipe.ts:215](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L215)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`): `PipeReturn`<`A`, `T`\>
 
@@ -1741,7 +1741,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:235](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L235)
+[pipe.ts:235](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L235)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`): `PipeReturn`<`A`, `U`\>
 
@@ -1802,7 +1802,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:277](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L277)
+[pipe.ts:277](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L277)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`, `uv`): `PipeReturn`<`A`, `V`\>
 
@@ -1865,7 +1865,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:321](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L321)
+[pipe.ts:321](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L321)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`, `uv`, `vw`): `PipeReturn`<`A`, `W`\>
 
@@ -1930,7 +1930,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:367](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L367)
+[pipe.ts:367](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L367)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`, `uv`, `vw`, `wx`): `PipeReturn`<`A`, `X`\>
 
@@ -1997,7 +1997,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:415](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L415)
+[pipe.ts:415](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L415)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`, `uv`, `vw`, `wx`, `xy`): `PipeReturn`<`A`, `Y`\>
 
@@ -2066,7 +2066,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:465](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L465)
+[pipe.ts:465](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L465)
 
 ▸ **pipe**<`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`\>(`ab`, `bc`, `cd`, `de`, `ef`, `fg`, `gh`, `hi`, `ij`, `jk`, `kl`, `lm`, `mn`, `no`, `op`, `pq`, `qr`, `rs`, `st`, `tu`, `uv`, `vw`, `wx`, `xy`, `yz`): `PipeReturn`<`A`, `Z`\>
 
@@ -2137,7 +2137,7 @@ ___
 
 #### Defined in
 
-[pipe.ts:517](https://github.com/yamiteru/pipem/blob/fbfc63f/src/pipe.ts#L517)
+[pipe.ts:517](https://github.com/yamiteru/pipem/blob/a451029/src/pipe.ts#L517)
 
 ___
 
@@ -2169,7 +2169,7 @@ ___
 
 #### Defined in
 
-[utils.ts:48](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L48)
+[utils.ts:48](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L48)
 
 ___
 
@@ -2207,7 +2207,7 @@ ___
 
 #### Defined in
 
-[utils.ts:83](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L83)
+[utils.ts:83](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L83)
 
 ___
 
@@ -2239,7 +2239,7 @@ ___
 
 #### Defined in
 
-[utils.ts:91](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L91)
+[utils.ts:91](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L91)
 
 ___
 
@@ -2277,7 +2277,7 @@ ___
 
 #### Defined in
 
-[utils.ts:38](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L38)
+[utils.ts:38](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L38)
 
 ___
 
@@ -2297,7 +2297,7 @@ ___
 
 #### Defined in
 
-[utils.ts:36](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L36)
+[utils.ts:36](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L36)
 
 ___
 
@@ -2317,7 +2317,7 @@ ___
 
 #### Defined in
 
-[utils.ts:34](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L34)
+[utils.ts:34](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L34)
 
 ___
 
@@ -2337,7 +2337,7 @@ ___
 
 #### Defined in
 
-[utils.ts:32](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L32)
+[utils.ts:32](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L32)
 
 ___
 
@@ -2357,7 +2357,7 @@ ___
 
 #### Defined in
 
-[utils.ts:30](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L30)
+[utils.ts:30](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L30)
 
 ___
 
@@ -2383,4 +2383,4 @@ ___
 
 #### Defined in
 
-[utils.ts:125](https://github.com/yamiteru/pipem/blob/fbfc63f/src/utils.ts#L125)
+[utils.ts:125](https://github.com/yamiteru/pipem/blob/a451029/src/utils.ts#L125)

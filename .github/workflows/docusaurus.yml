@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+
+defaults:
+ run:
+  working-directory: ./docs
+
 jobs:
   deploy:
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -26,8 +31,6 @@ jobs:
           node-version: '18.x'
           cache: 'pnpm'
 
-      - run:
-        working-directory: ./docs
       - run: pnpm install
       - run: pnpm run build
 

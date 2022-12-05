@@ -1,6 +1,6 @@
 import { Bool, Fn } from "../../types";
 
-/*
+/**
  * Returns `Option1` or `Option2` based on predicate
  *
  * @remarks

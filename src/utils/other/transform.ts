@@ -1,6 +1,6 @@
 import { Fn } from "../../types";
 
-/*
+/**
  * Returns output based on fn.
  *
  * @remarks

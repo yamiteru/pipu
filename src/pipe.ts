@@ -1,6 +1,6 @@
 import { PipeFn, PipeReturn } from "./types";
 
-/*
+/**
   @internal
 
   Create a Promise inside which we try to reduce functions.
@@ -568,7 +568,7 @@ export function pipe<
   xy: PipeFn<X, Y>,
   yz: PipeFn<Y, Z>,
 ): PipeReturn<A, Z>;
-/*
+/**
   The provided functions are executed in sequence where the return value
   from the last executed function is passed into the next function.
 
@@ -592,7 +592,7 @@ export function pipe(...fs: PipeFn<unknown, unknown>[]) {
   const length = fs.length;
   const id = Symbol();
 
-  /*
+  /**
     Takes a value and tries to sequentially
     apply it to provided functions inside a Promise.
 

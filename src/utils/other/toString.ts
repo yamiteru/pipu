@@ -1,4 +1,4 @@
-/*
+/**
  * Transform any value into string.
  *
  * @remarks

@@ -1,7 +1,7 @@
 import { Bool, Fn } from "../../types";
 import { condition } from "./condition";
 
-/*
+/**
  * Returns `Value` if either one of the predicates returns true 
  *
  * @remarks

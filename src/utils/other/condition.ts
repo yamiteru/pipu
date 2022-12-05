@@ -1,6 +1,6 @@
 import { Bool, Fn } from "../../types";
 
-/*
+/**
  * Returns input or undefined based on predicate.
  *
  * @remarks

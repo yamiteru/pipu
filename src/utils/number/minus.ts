@@ -1,6 +1,6 @@
 import { transform } from "../other";
 
-/*
+/**
  * Decrements curried value by the input value
  */
 export const minus = (number: number) => 

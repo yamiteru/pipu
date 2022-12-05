@@ -1,6 +1,6 @@
 import { condition } from "./condition";
 
-/*
+/**
  * Compares if one value is not equal to the second value.
  *
  * @remarks

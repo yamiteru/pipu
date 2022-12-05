@@ -1,6 +1,6 @@
 import { Fn } from "../../types";
 
-/*
+/**
  * Executes effect and returns input value.
  *
  * @remarks

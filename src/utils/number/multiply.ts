@@ -1,6 +1,6 @@
 import { transform } from "../other";
 
-/*
+/**
  * Multiply curried value by the first value
  */
 export const multiply = (number: number) => 

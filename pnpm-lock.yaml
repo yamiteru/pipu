@@ -9,7 +9,6 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.43.0
   '@typescript-eslint/parser': 5.43.0
   auto-changelog: 2.4.0
-  docusaurus-plugin-typedoc: ^0.17.5
   eslint: 8.27.0
   eslint-config-prettier: 8.5.0
   husky: 8.0.2
@@ -17,8 +16,7 @@ specifiers:
   prettier: 2.7.1
   release-it: 15.5.0
   ts-jest: 29.0.3
-  typedoc: ^0.23.21
-  typedoc-plugin-markdown: ^3.13.6
+  typedoc: 0.23.21
   typescript: 4.9.3
 
 devDependencies:
@@ -30,7 +28,6 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.43.0_wze2rj5tow7zwqpgbdx2buoy3m
   '@typescript-eslint/parser': 5.43.0_e3uo4sehh4zr4i6m57mkkxxv7y
   auto-changelog: 2.4.0
-  docusaurus-plugin-typedoc: 0.17.5_vw2i6qmpkoeqkz2lubusygb56a
   eslint: 8.27.0
   eslint-config-prettier: 8.5.0_eslint@8.27.0
   husky: 8.0.2
@@ -39,7 +36,6 @@ devDependencies:
   release-it: 15.5.0
   ts-jest: 29.0.3_4f6uxrzmuwipl5rr3bcogf6k74
   typedoc: 0.23.21_typescript@4.9.3
-  typedoc-plugin-markdown: 3.13.6_typedoc@0.23.21
   typescript: 4.9.3
 
 packages:
@@ -1926,16 +1922,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
-    dev: true
-
-  /docusaurus-plugin-typedoc/0.17.5_vw2i6qmpkoeqkz2lubusygb56a:
-    resolution: {integrity: sha512-mMTk4lRy2+wQ7fmMOv6RLfKkoGnHkBLE8qUoPfWFoqUYDDDInwVQKxz12FNnQx86eJSLgBiZmuY/zB/bYsZQlQ==}
-    peerDependencies:
-      typedoc: '>=0.22.0'
-      typedoc-plugin-markdown: '>=3.11.10'
-    dependencies:
-      typedoc: 0.23.21_typescript@4.9.3
-      typedoc-plugin-markdown: 3.13.6_typedoc@0.23.21
     dev: true
 
   /dot-prop/6.0.1:
@@ -4860,15 +4846,6 @@ packages:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
     dependencies:
       is-typedarray: 1.0.0
-    dev: true
-
-  /typedoc-plugin-markdown/3.13.6_typedoc@0.23.21:
-    resolution: {integrity: sha512-ISSc9v3BK7HkokxSBuJPttXox4tJ6hP0N9wfSIk0fmLN67+eqtAxbk97gs2nDiuha+RTO5eW9gdeAb+RPP0mgg==}
-    peerDependencies:
-      typedoc: '>=0.23.0'
-    dependencies:
-      handlebars: 4.7.7
-      typedoc: 0.23.21_typescript@4.9.3
     dev: true
 
   /typedoc/0.23.21_typescript@4.9.3:

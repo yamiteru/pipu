@@ -1,5 +1,5 @@
 import {
-    all,
+  all,
   and,
   append,
   at,
@@ -204,7 +204,7 @@ describe("Methods", () => {
   test("either", () => {
     const isGoodDrink = either<string>(
       (v) => v === "tea",
-      (v) => v === "coffee"
+      (v) => v === "coffee",
     );
 
     expect(isGoodDrink("tea")).toBe("tea");
@@ -214,92 +214,97 @@ describe("Methods", () => {
   test("both", () => {
     const isAlive = both<number>(
       (v) => v >= 0,
-      (v) => v <= 150
+      (v) => v <= 150,
     );
 
     expect(isAlive(-10)).toBe(undefined);
     expect(isAlive(25)).toBe(25);
   });
 
-	test("all", () => {
-		const isStrongPassword = all<string>(
-			(v) => v.length >= 8,
-			(v) => v.includes("strong"),
-			(v) => v.includes("_"),
-			(v) => v.endsWith("123456")
-		);
+  test("all", () => {
+    const isStrongPassword = all<string>(
+      (v) => v.length >= 8,
+      (v) => v.includes("strong"),
+      (v) => v.includes("_"),
+      (v) => v.endsWith("123456"),
+    );
 
-		expect(isStrongPassword("yoyoyoyoyo")).toBe(undefined);
-		expect(isStrongPassword("strong_123456")).toBe("strong_123456");
-	});
+    expect(isStrongPassword("yoyoyoyoyo")).toBe(undefined);
+    expect(isStrongPassword("strong_123456")).toBe("strong_123456");
+  });
 
-	test("entries", () => {
-		expect(entries({
-			name: "yamiteru",
-			age: 25
-		})).toStrictEqual([
-			["name", "yamiteru"],
-			["age", 25]
-		]);
-	});
+  test("entries", () => {
+    expect(
+      entries({
+        name: "yamiteru",
+        age: 25,
+      }),
+    ).toStrictEqual([
+      ["name", "yamiteru"],
+      ["age", 25],
+    ]);
+  });
 
-	test("values", () => {
-		expect(values({
-			one: 1,
-			two: 2
-		})).toStrictEqual(
-			[1, 2]
-		);
-	});
+  test("values", () => {
+    expect(
+      values({
+        one: 1,
+        two: 2,
+      }),
+    ).toStrictEqual([1, 2]);
+  });
 
-	test("keys", () => {
-		expect(keys({
-			function: "add",
-			props: [1, 2]
-		})).toStrictEqual([
-			"function",
-			"props"
-		]);
-	});
+  test("keys", () => {
+    expect(
+      keys({
+        function: "add",
+        props: [1, 2],
+      }),
+    ).toStrictEqual(["function", "props"]);
+  });
 
-	test("pick", () => {
-		expect(pick(["a", "b"])({
-			a: 1,
-			b: 2,
-			c: 3
-		})).toStrictEqual({
-			a: 1,
-			b: 2
-		});
-	});
+  test("pick", () => {
+    expect(
+      pick(["a", "b"])({
+        a: 1,
+        b: 2,
+        c: 3,
+      }),
+    ).toStrictEqual({
+      a: 1,
+      b: 2,
+    });
+  });
 
-	test("omit", () => {
-		expect(omit(["a", "b"])({
-			a: 1,
-			b: 2,
-			c: 3
-		})).toStrictEqual({
-			c: 3
-		});
-	});
+  test("omit", () => {
+    expect(
+      omit(["a", "b"])({
+        a: 1,
+        b: 2,
+        c: 3,
+      }),
+    ).toStrictEqual({
+      c: 3,
+    });
+  });
 
-	test("add", () => {
-		const isAdult = and<number>(
-			(v) => v >= 18,
-			(v) => v <= 150 
-		);
-		
-		expect(isAdult(7)).toBe(undefined);
-		expect(isAdult(25)).toBe(25);
-	});
+  test("add", () => {
+    const isAdult = and<number>(
+      (v) => v >= 18,
+      (v) => v <= 150,
+    );
 
-	test("or", () => {
-		const isAlive = or<number>(
-			(v) => v >= 0,
-			(v) => v <= 150
-		);
+    expect(isAdult(7)).toBe(undefined);
+    expect(isAdult(25)).toBe(25);
+  });
 
-		expect(isAlive(-10)).toBe(undefined);
-		expect(isAlive(10)).toBe(undefined);
-	});
+  test("or", () => {
+    const isAlive = or<number>(
+      (v) => v >= 0,
+      (v) => v <= 150,
+    );
+
+    expect(isAlive(-10)).toBe(undefined);
+    expect(isAlive(10)).toBe(undefined);
+  });
 });

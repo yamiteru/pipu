@@ -80,104 +80,90 @@ export const flip = call("reverse");
 export const flatten = call("flat");
 
 // Adds value at the beginning of an array
-export const prepend = <T>(value: T) =>
-  map<T[]>((v) => [value, ...v]);
+export const prepend = <T>(value: T) => map<T[]>((v) => [value, ...v]);
 
 // Adds value at the end of an array
-export const append = <T>(value: T) =>
-  map<T[]>((v) => [...v, value]);
+export const append = <T>(value: T) => map<T[]>((v) => [...v, value]);
 
 // Matches pattern inside a string
 export const regex = (pattern: RegExp) =>
   filter<string>((v) => pattern.test(v));
 
 // Passes if either one of the predicates returns true
-export const either = <T>(
-  p1: (data: T) => boolean,
-  p2: (data: T) => boolean
-) => filter<T>((v) => p1(v) || p2(v));
+export const either = <T>(p1: (data: T) => boolean, p2: (data: T) => boolean) =>
+  filter<T>((v) => p1(v) || p2(v));
 
 // Passes if both of the predicates return true
-export const both = <T>(
-  p1: (data: T) => boolean,
-  p2: (data: T) => boolean
-) => filter<T>((v) => p1(v) && p2(v));
+export const both = <T>(p1: (data: T) => boolean, p2: (data: T) => boolean) =>
+  filter<T>((v) => p1(v) && p2(v));
 
 // Passes if all of the predicates return true
-export const all = <T>(
-	...ps: ((data: T) => boolean)[]
-) => filter<T>((v) => {
-	for(let i = 0; i < ps.length; ++i) {
-		if(ps[i](v) === false) {
-			return false;
-		}
-	}
+export const all = <T>(...ps: ((data: T) => boolean)[]) =>
+  filter<T>((v) => {
+    for (let i = 0; i < ps.length; ++i) {
+      if (ps[i](v) === false) {
+        return false;
+      }
+    }
 
-	return true;
-});
+    return true;
+  });
 
 // Returns object entries
-export const entries = <
-	T extends Record<string, unknown>
->(obj: T) => map((v: T) => Object.entries(v))(obj);
+export const entries = <T extends Record<string, unknown>>(obj: T) =>
+  map((v: T) => Object.entries(v))(obj);
 
 // Returns object values
-export const values = <
-	T extends Record<string, unknown>
->(obj: T) => map((v: T) => Object.values(v))(obj);
+export const values = <T extends Record<string, unknown>>(obj: T) =>
+  map((v: T) => Object.values(v))(obj);
 
 // Returns object keys
-export const keys = <
-	T extends Record<string, unknown>
->(obj: T) => map((v: T) => Object.keys(v))(obj);
+export const keys = <T extends Record<string, unknown>>(obj: T) =>
+  map((v: T) => Object.keys(v))(obj);
 
 // Returns the input object with only the specified keys
-export const pick = <
-	T extends string[]
->(keys: T) => map((v: Record<string, unknown>) => {
-	const res: Record<string, unknown> = {};	
+export const pick = <T extends string[]>(keys: T) =>
+  map((v: Record<string, unknown>) => {
+    const res: Record<string, unknown> = {};
 
-	for(let i = 0; i < keys.length; ++i) {
-		const k = keys[i];
-		res[k] = v[k];
-	}
+    for (let i = 0; i < keys.length; ++i) {
+      const k = keys[i];
+      res[k] = v[k];
+    }
 
-	return res;
-});
+    return res;
+  });
 
 // Returns the input objects without the specified keys
-export const omit = <
-	T extends string[]
->(keys: T) => map((v: Record<string, unknown>) => {
-	const res: Record<string, unknown> = {};
+export const omit = <T extends string[]>(keys: T) =>
+  map((v: Record<string, unknown>) => {
+    const res: Record<string, unknown> = {};
 
-	for(const k in v) {
-		if(!keys.includes(k)) {
-			res[k] = v[k];
-		}
-	}
+    for (const k in v) {
+      if (!keys.includes(k)) {
+        res[k] = v[k];
+      }
+    }
 
-	return res;
-});
+    return res;
+  });
 
 // Returns input value if all predicates return true
-export const and = <T>(
-	...ps: ((data: T) => boolean)[]
-) => filter<T>((v) => {
-	for(let i = 0; i < ps.length; ++i) {
-		if(!ps[i](v)) return false; 
-	}
+export const and = <T>(...ps: ((data: T) => boolean)[]) =>
+  filter<T>((v) => {
+    for (let i = 0; i < ps.length; ++i) {
+      if (!ps[i](v)) return false;
+    }
 
-	return true;
-});
+    return true;
+  });
 
 // Returns input value if at least one predicate returns true
-export const or = <T>(
-	...ps: ((data: T) => boolean)[]
-) => filter<T>((v) => {
-	for(let i = 0; i < ps.length; ++i) {
-		if(!ps[i](v)) return false;
-	}
+export const or = <T>(...ps: ((data: T) => boolean)[]) =>
+  filter<T>((v) => {
+    for (let i = 0; i < ps.length; ++i) {
+      if (!ps[i](v)) return false;
+    }
 
-	return true;
-});
+    return true;
+  });

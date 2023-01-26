@@ -1,237 +1,210 @@
-import { PipeFn, PipeReturn } from "./types";
+import { Pipeable } from "./types";
 
-/*
-  @internal
-
-  Create a Promise inside which we try to reduce functions.
-  If undefined is returned then the Promise resolves with undefined.
-  Otherwise it gets resolved with the last value.
-*/
-const createPipePromise = (
-  fs: PipeFn<unknown, unknown>[],
-  length: number,
-  id: symbol,
-  value: unknown,
-) =>
-  new Promise((resolve) => {
-    let latest = value;
-
-    for (let i = 0; i < length; ++i) {
-      const res = fs[i](latest, id);
-      // NOTE: can we make this branchless?
-      res === undefined && resolve(undefined);
-
-      latest = res;
-    }
-
-    resolve(latest);
-  });
-
-export function pipe<A, B>(ab: PipeFn<A, B>): PipeReturn<A, B>;
+export function pipe<A, B>(ab: Pipeable<A, B>): Pipeable<A, B>;
 export function pipe<A, B, C>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-): PipeReturn<A, C>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+): Pipeable<A, C>;
 export function pipe<A, B, C, D>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-): PipeReturn<A, D>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+): Pipeable<A, D>;
 export function pipe<A, B, C, D, E>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-): PipeReturn<A, E>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+): Pipeable<A, E>;
 export function pipe<A, B, C, D, E, F>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-): PipeReturn<A, F>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+): Pipeable<A, F>;
 export function pipe<A, B, C, D, E, F, G>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-): PipeReturn<A, G>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+): Pipeable<A, G>;
 export function pipe<A, B, C, D, E, F, G, H>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-): PipeReturn<A, H>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+): Pipeable<A, H>;
 export function pipe<A, B, C, D, E, F, G, H, I>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-): PipeReturn<A, I>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+): Pipeable<A, I>;
 export function pipe<A, B, C, D, E, F, G, H, I, J>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-): PipeReturn<A, J>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+): Pipeable<A, J>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-): PipeReturn<A, K>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+): Pipeable<A, K>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-): PipeReturn<A, L>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+): Pipeable<A, L>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-): PipeReturn<A, M>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+): Pipeable<A, M>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-): PipeReturn<A, N>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+): Pipeable<A, N>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-): PipeReturn<A, O>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+): Pipeable<A, O>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-): PipeReturn<A, P>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+): Pipeable<A, P>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-): PipeReturn<A, Q>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+): Pipeable<A, Q>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-): PipeReturn<A, R>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+): Pipeable<A, R>;
 export function pipe<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S>(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-): PipeReturn<A, S>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+): Pipeable<A, S>;
 export function pipe<
   A,
   B,
@@ -254,26 +227,26 @@ export function pipe<
   S,
   T,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-): PipeReturn<A, T>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+): Pipeable<A, T>;
 export function pipe<
   A,
   B,
@@ -297,27 +270,27 @@ export function pipe<
   T,
   U,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-): PipeReturn<A, U>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+): Pipeable<A, U>;
 export function pipe<
   A,
   B,
@@ -342,28 +315,28 @@ export function pipe<
   U,
   V,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-  uv: PipeFn<U, V>,
-): PipeReturn<A, V>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+  uv: Pipeable<U, V>,
+): Pipeable<A, V>;
 export function pipe<
   A,
   B,
@@ -389,29 +362,29 @@ export function pipe<
   V,
   W,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-  uv: PipeFn<U, V>,
-  vw: PipeFn<V, W>,
-): PipeReturn<A, W>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+  uv: Pipeable<U, V>,
+  vw: Pipeable<V, W>,
+): Pipeable<A, W>;
 export function pipe<
   A,
   B,
@@ -438,30 +411,30 @@ export function pipe<
   W,
   X,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-  uv: PipeFn<U, V>,
-  vw: PipeFn<V, W>,
-  wx: PipeFn<W, X>,
-): PipeReturn<A, X>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+  uv: Pipeable<U, V>,
+  vw: Pipeable<V, W>,
+  wx: Pipeable<W, X>,
+): Pipeable<A, X>;
 export function pipe<
   A,
   B,
@@ -489,31 +462,31 @@ export function pipe<
   X,
   Y,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-  uv: PipeFn<U, V>,
-  vw: PipeFn<V, W>,
-  wx: PipeFn<W, X>,
-  xy: PipeFn<X, Y>,
-): PipeReturn<A, Y>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+  uv: Pipeable<U, V>,
+  vw: Pipeable<V, W>,
+  wx: Pipeable<W, X>,
+  xy: Pipeable<X, Y>,
+): Pipeable<A, Y>;
 export function pipe<
   A,
   B,
@@ -542,70 +515,77 @@ export function pipe<
   Y,
   Z,
 >(
-  ab: PipeFn<A, B>,
-  bc: PipeFn<B, C>,
-  cd: PipeFn<C, D>,
-  de: PipeFn<D, E>,
-  ef: PipeFn<E, F>,
-  fg: PipeFn<F, G>,
-  gh: PipeFn<G, H>,
-  hi: PipeFn<H, I>,
-  ij: PipeFn<I, J>,
-  jk: PipeFn<J, K>,
-  kl: PipeFn<K, L>,
-  lm: PipeFn<L, M>,
-  mn: PipeFn<M, N>,
-  no: PipeFn<N, O>,
-  op: PipeFn<O, P>,
-  pq: PipeFn<P, Q>,
-  qr: PipeFn<Q, R>,
-  rs: PipeFn<R, S>,
-  st: PipeFn<S, T>,
-  tu: PipeFn<T, U>,
-  uv: PipeFn<U, V>,
-  vw: PipeFn<V, W>,
-  wx: PipeFn<W, X>,
-  xy: PipeFn<X, Y>,
-  yz: PipeFn<Y, Z>,
-): PipeReturn<A, Z>;
+  ab: Pipeable<A, B>,
+  bc: Pipeable<B, C>,
+  cd: Pipeable<C, D>,
+  de: Pipeable<D, E>,
+  ef: Pipeable<E, F>,
+  fg: Pipeable<F, G>,
+  gh: Pipeable<G, H>,
+  hi: Pipeable<H, I>,
+  ij: Pipeable<I, J>,
+  jk: Pipeable<J, K>,
+  kl: Pipeable<K, L>,
+  lm: Pipeable<L, M>,
+  mn: Pipeable<M, N>,
+  no: Pipeable<N, O>,
+  op: Pipeable<O, P>,
+  pq: Pipeable<P, Q>,
+  qr: Pipeable<Q, R>,
+  rs: Pipeable<R, S>,
+  st: Pipeable<S, T>,
+  tu: Pipeable<T, U>,
+  uv: Pipeable<U, V>,
+  vw: Pipeable<V, W>,
+  wx: Pipeable<W, X>,
+  xy: Pipeable<X, Y>,
+  yz: Pipeable<Y, Z>,
+): Pipeable<A, Z>;
 /*
   The provided functions are executed in sequence where the return value
   from the last executed function is passed into the next function.
 
   Functions can stop function execution and force the pipe to
-  return prematurely by returning undefined.
+  prematurely stop execution by throwing.
 
   The maximum number of functions passed into a pipe is 24.
   This is caused by TypeScript's inference limitations.
 
-  @param fs - List of functions that return either T or undefined
+  @param fs - List of functions that return T
 
   @example
   ```ts
   const doubleEvenNumbersPipe = pipe(
     filter((v: number) => !(v%2)),
-    map((v) => v * 2)
+    map((v) => v * 2),
   );
   ```
 */
-export function pipe(...fs: PipeFn<unknown, unknown>[]) {
+export function pipe(...fs: Pipeable<unknown, unknown>[]) {
   const length = fs.length;
-  const id = Symbol();
 
   /*
     Takes a value and tries to sequentially
-    apply it to provided functions inside a Promise.
+    apply it to the provided functions.
 
     @params value - Value which is used as an input for the first function
 
     @example
     ```ts
     // returns undefined
-    const res1 = await doubleEvenNumbersPipe(1);
+    const res1 = doubleEvenNumbersPipe(1);
 
     // returns 4
-    const res2 = await doubleEvenNumbersPipe(2);
+    const res2 = doubleEvenNumbersPipe(2);
     ```
   */
-  return (value: unknown) => createPipePromise(fs, length, id, value);
+  return (value: unknown, id = Symbol()) => {
+		let latest = value;
+
+    for (let i = 0; i < length; ++i) {
+      latest = fs[i](latest, id);
+    }
+
+    return latest;
+	};
 }

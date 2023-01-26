@@ -1,5 +1,12 @@
-export type Either<L, R> = L | R;
-export type Maybe<T> = Either<undefined, T>;
-export type PipeFn<I, O> = (data: I, id: symbol) => Maybe<O>;
-export type PipeReturn<I, O> = (data: I) => Promise<Maybe<O>>;
-export type Struct = Record<string | number | symbol, unknown>;
+export type Either<Left, Right> = Left | Right;
+
+export type Pipeable<Input, Output> = (data: Input, id?: symbol) => Output;
+
+export type Fn<
+	Input extends unknown[], 
+	Output
+> = (...props: Input) => Output;
+
+export type Predicate<
+	Input extends unknown[]
+> = Fn<Input, boolean>;

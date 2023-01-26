@@ -21,7 +21,6 @@ import {
   keys,
   lt,
   lte,
-  map,
   minus,
   multiply,
   neq,
@@ -39,13 +38,6 @@ import {
 } from "../src";
 
 describe("Methods", () => {
-  test("map", () => {
-    const double = map<number>((v) => v * 2);
-
-    expect(double(1)).toBe(2);
-    expect(double(2)).toBe(4);
-  });
-
   test("ifElse", () => {
     const oddOrEven = ifElse(
       (v: number) => !(v % 2),

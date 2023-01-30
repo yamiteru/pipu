@@ -8,28 +8,31 @@ describe("Pipe", () => {
     expect(typeof testPipe).toBe("function");
   });
 
-  it("should execute all methods", async () => {
+  it("should execute all methods", () => {
     const testPipe = pipe(
       (v: number) => v * 2,
       (v) => `${v}`,
     );
 
-    const res = await testPipe(1);
+    const res = testPipe(1);
 
     expect(res).toBe("2");
   });
 
-  it("should stop execution on undefined", async () => {
+  it("should stop execution and throw on error", () => {
     const testPipe = pipe(
       (v: number) => (!(v % 2) ? v : undefined),
-      (v) => v * 2,
+      (v) => {
+				if(v === undefined) {
+					throw {};
+				} else {
+					return v;
+				}
+			},
       (v) => `${v}`,
     );
 
-    const res1 = await testPipe(1);
-    const res2 = await testPipe(2);
-
-    expect(res1).toBe(undefined);
-    expect(res2).toBe("4");
+    expect(() => testPipe(1)).toThrow();
+    expect(() => testPipe(2)).not.toThrow();
   });
 });

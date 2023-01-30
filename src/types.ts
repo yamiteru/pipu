@@ -10,3 +10,9 @@ export type Fn<
 export type Predicate<
 	Input extends unknown[]
 > = Fn<Input, boolean>;
+
+export type Error = {
+	reason: string;
+	value: unknown;
+	context: Record<string, unknown>;
+};

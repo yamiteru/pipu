@@ -564,21 +564,6 @@ export function pipe<
 export function pipe(...fs: Pipeable<unknown, unknown>[]) {
   const length = fs.length;
 
-  /*
-    Takes a value and tries to sequentially
-    apply it to the provided functions.
-
-    @params value - Value which is used as an input for the first function
-
-    @example
-    ```ts
-    // returns undefined
-    const res1 = doubleEvenNumbersPipe(1);
-
-    // returns 4
-    const res2 = doubleEvenNumbersPipe(2);
-    ```
-  */
   return (value: unknown, id = Symbol()) => {
 		let latest = value;
 

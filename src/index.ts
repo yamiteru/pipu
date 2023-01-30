@@ -1,3 +1,3 @@
 export * from "./pipe";
-export * from "./utils";
+export * from "./pipeable";
 export * from "./types";

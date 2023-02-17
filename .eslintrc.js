@@ -6,14 +6,14 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
-  plugins: [
-		"@typescript-eslint"
-	],
+  plugins: ["@typescript-eslint"],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: 2022,
   },
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+  },
   env: {
     browser: true,
     es2022: true,

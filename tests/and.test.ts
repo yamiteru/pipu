@@ -2,8 +2,8 @@ import { and, filter } from "../src";
 
 describe("and", () => {
   const _and = and(
-    filter((v: number) => v > 0),
-    filter((v) => v <= 10),
+    filter<number>((v) => v > 0),
+    filter<number>((v) => v <= 10),
   );
 
   it("should return value if no pipeable throws", () => {

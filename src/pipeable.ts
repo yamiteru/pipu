@@ -1,4 +1,13 @@
-import { Pipeable, Predicate } from "./types";
+import type {
+  InferOptionInputs,
+  InferOptionOutputs,
+  InferPipeableInputs,
+  ObjectAny,
+  Pipeable,
+  PipeableAny,
+  Predicate,
+  PredicateAny,
+} from "./types";
 import { error } from "./utils";
 
 const filterError = error("FILTER");
@@ -6,7 +15,7 @@ const filterError = error("FILTER");
 export function filter<Input>(predicate: Predicate<Input>) {
   return ((value) => {
     if (!predicate(value)) {
-      filterError(value);
+      throw filterError(value);
     }
 
     return value;
@@ -15,9 +24,9 @@ export function filter<Input>(predicate: Predicate<Input>) {
 
 const matchError = error("MATCH");
 
-export function match<Input, Outputs extends unknown[]>(options: {
-  [Key in keyof Outputs]: [Predicate<Input>, Pipeable<Input, Outputs[Key]>];
-}) {
+export function match<Options extends [PredicateAny, PipeableAny][]>(
+  options: Options,
+) {
   const length = options.length;
 
   return ((value) => {
@@ -29,11 +38,11 @@ export function match<Input, Outputs extends unknown[]>(options: {
       }
     }
 
-    matchError(value);
-  }) as Pipeable<Input, Outputs[number]>;
+    throw matchError(value);
+  }) as Pipeable<InferOptionInputs<Options>, InferOptionOutputs<Options>>;
 }
 
-export function and<Input>(...pipeables: Pipeable<Input, Input>[]) {
+export function and<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
   const length = pipeables.length;
 
   return ((value) => {
@@ -42,12 +51,15 @@ export function and<Input>(...pipeables: Pipeable<Input, Input>[]) {
     }
 
     return value;
-  }) as Pipeable<Input, Input>;
+  }) as Pipeable<
+    InferPipeableInputs<Pipeables>,
+    InferPipeableInputs<Pipeables>
+  >;
 }
 
 const orError = error("OR");
 
-export function or<Input>(...pipeables: Pipeable<Input, Input>[]) {
+export function or<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
   const length = pipeables.length;
 
   return ((value) => {
@@ -59,16 +71,16 @@ export function or<Input>(...pipeables: Pipeable<Input, Input>[]) {
       }
     }
 
-    orError(value);
-  }) as Pipeable<Input, Input>;
+    throw orError(value);
+  }) as Pipeable<
+    InferPipeableInputs<Pipeables>,
+    InferPipeableInputs<Pipeables>
+  >;
 }
 
 export function wrap<Input, Output>(
   pipeable: Pipeable<Input, Output>,
-  error: (
-    value: Input,
-    childError: Record<string, unknown>,
-  ) => Record<string, unknown>,
+  error: (value: Input, error: ObjectAny) => ObjectAny,
 ) {
   return ((value) => {
     try {
@@ -79,7 +91,7 @@ export function wrap<Input, Output>(
         maybeError !== null &&
           typeof maybeError === "object" &&
           maybeError instanceof Error === false
-          ? (maybeError as Record<string, unknown>)
+          ? (maybeError as ObjectAny)
           : {},
       );
     }

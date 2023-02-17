@@ -1,8 +1,8 @@
 import { match } from "../src";
 
 describe("match", () => {
-  const matchNumber = match<number, ["one", "two"]>([
-    [(v) => v === 1, () => "one"],
+  const matchNumber = match([
+    [(v: number) => v === 1, () => "one"],
     [(v) => v === 2, () => "two"],
   ]);
 

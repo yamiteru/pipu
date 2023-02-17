@@ -1,4 +1,4 @@
-import type { Pipeable } from "./types";
+import { Pipeable, Predicate } from "./types";
 
 const emptyProps = () => ({});
 
@@ -6,11 +6,17 @@ export const error =
   <Input>(
     reason: string,
     props: (value: Input) => Record<string, unknown> = emptyProps,
-  ): Pipeable<Input, never> =>
-  (value) => {
-    throw {
+  ) =>
+  (value: Input, error = {}) => {
+    return {
+      ...error,
       reason,
       value,
       ...props(value),
     };
   };
+
+export const option = <Input, Output>(
+  predicate: Predicate<Input>,
+  pipeable: Pipeable<Input, Output>,
+) => [predicate, pipeable] as [Predicate<Input>, Pipeable<Input, Output>];

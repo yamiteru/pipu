@@ -1,69 +1,87 @@
-import { Fn, Predicate, Pipeable, Either, Error } from "./types";
+import { Pipeable, Predicate } from "./types";
 import { error } from "./utils";
 
-export const filter = <
-	Input,
-	Output = Input
->(
-	predicate: Predicate<[Input]>,
-	throwError: Pipeable<Input, never> = error("FILTER")
-): Pipeable<Input, Output> => (value) => {
-	if(!predicate(value)) throwError(value);
-	return value as unknown as Output;
-};
+const filterError = error("FILTER");
 
-export const and = <Input, Outputs extends unknown[]>(...pipeables: {
-	[Key in keyof Outputs]: Pipeable<Input, Outputs[Key]>;
-}) => filter<Input, Outputs[number]>((value) => {
-	for(let i = 0; i < pipeables.length; ++i) {
-		pipeables[i](value);
-	}
+export function filter<Input>(predicate: Predicate<Input>) {
+  return ((value) => {
+    if (!predicate(value)) {
+      filterError(value);
+    }
 
-	return true;
-});
+    return value;
+  }) as Pipeable<Input, Input>;
+}
 
-export const or = <Input, Outputs extends unknown[]>(...pipeables: {
-	[Key in keyof Outputs]: Pipeable<Input, Outputs[Key]>;
-}) => filter<Input, Outputs[number]>(
-	(value) => {
-		let latestError: Either<Error, null> = null;
+const matchError = error("MATCH");
 
-		for(let i = 0; i < pipeables.length; ++i) {
-			try {
-				pipeables[i](value);
-				return true;
-			} catch(e) {
-				latestError = e as never;
-			}
-		}
+export function match<Input, Outputs extends unknown[]>(options: {
+  [Key in keyof Outputs]: [Predicate<Input>, Pipeable<Input, Outputs[Key]>];
+}) {
+  const length = options.length;
 
-		throw latestError;
-	}
-);
+  return ((value) => {
+    for (let i = 0; i < length; ++i) {
+      const [predicate, output] = options[i];
 
-export const apply = <
-	Input extends unknown[],
-	Output
->(fn: Fn<Input, Output>) => fn;
+      if (predicate(value)) {
+        return output(value);
+      }
+    }
 
-export const condition = <
-	Input, 
-	Output
->(conditions: [Predicate<[Input]>, Fn<[Input], Output>][]) => ((value) => {
-	for(let i = 0; i < conditions.length; ++i) {
-		const condition = conditions[i];
+    matchError(value);
+  }) as Pipeable<Input, Outputs[number]>;
+}
 
-		if(condition[0](value)) {
-			return condition[1](value);	
-		}
-	}
-	
-	error("CONDITION");
-}) as Pipeable<Input, Output>;
+export function and<Input>(...pipeables: Pipeable<Input, Input>[]) {
+  const length = pipeables.length;
 
-export const match = <
-	Input extends string | number | symbol,
-	Output
->(options: Record<Input, Fn<[Input], Output>>): Pipeable<Input, Output> => (value) => {
-	return options[value](value);		
-};
+  return ((value) => {
+    for (let i = 0; i < length; ++i) {
+      pipeables[i](value);
+    }
+
+    return value;
+  }) as Pipeable<Input, Input>;
+}
+
+const orError = error("OR");
+
+export function or<Input>(...pipeables: Pipeable<Input, Input>[]) {
+  const length = pipeables.length;
+
+  return ((value) => {
+    for (let i = 0; i < length; ++i) {
+      try {
+        return pipeables[i](value);
+      } catch {
+        continue;
+      }
+    }
+
+    orError(value);
+  }) as Pipeable<Input, Input>;
+}
+
+export function wrap<Input, Output>(
+  pipeable: Pipeable<Input, Output>,
+  error: (
+    value: Input,
+    childError: Record<string, unknown>,
+  ) => Record<string, unknown>,
+) {
+  return ((value) => {
+    try {
+      return pipeable(value);
+    } catch (maybeError) {
+      throw error(
+        value,
+        maybeError !== null &&
+          typeof maybeError === "object" &&
+          maybeError instanceof Error === false
+          ? (maybeError as Record<string, unknown>)
+          : {},
+      );
+    }
+  }) as Pipeable<Input, Output>;
+}

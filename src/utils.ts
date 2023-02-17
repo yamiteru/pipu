@@ -1,17 +1,16 @@
-import type { Either, Fn, Pipeable } from "./types";
+import type { Pipeable } from "./types";
 
-export const error = <Input>(
-	reason: string, 
-	context: Either<
-		Fn<[Input], Record<string, unknown>>, 
-		Record<string, unknown>
-	> = {}
-): Pipeable<Input, never> => (value) => {
-	throw {
-		reason,
-		value,
-		context: typeof context === "function" 
-			? context(value)
-			: context
-	};
-};
+const emptyProps = () => ({});
+
+export const error =
+  <Input>(
+    reason: string,
+    props: (value: Input) => Record<string, unknown> = emptyProps,
+  ): Pipeable<Input, never> =>
+  (value) => {
+    throw {
+      reason,
+      value,
+      ...props(value),
+    };
+  };

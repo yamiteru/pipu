@@ -557,7 +557,7 @@ export function pipe<
   ```ts
   const doubleEvenNumbersPipe = pipe(
     filter((v: number) => !(v%2)),
-    map((v) => v * 2),
+    (v) => v * 2,
   );
   ```
 */
@@ -565,12 +565,12 @@ export function pipe(...fs: Pipeable<unknown, unknown>[]) {
   const length = fs.length;
 
   return (value: unknown, id = Symbol()) => {
-		let latest = value;
+    let latest = value;
 
     for (let i = 0; i < length; ++i) {
       latest = fs[i](latest, id);
     }
 
     return latest;
-	};
+  };
 }

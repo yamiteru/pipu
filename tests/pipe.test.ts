@@ -23,12 +23,12 @@ describe("Pipe", () => {
     const testPipe = pipe(
       (v: number) => (!(v % 2) ? v : undefined),
       (v) => {
-				if(v === undefined) {
-					throw {};
-				} else {
-					return v;
-				}
-			},
+        if (v === undefined) {
+          throw {};
+        } else {
+          return v;
+        }
+      },
       (v) => `${v}`,
     );
 

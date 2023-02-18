@@ -11,14 +11,14 @@ import {
 
 const simplePipe = pipe(
   tryCatch(
-    both<number>(
+    both(
       condition<number>((v) => v > 0),
       condition<number>((v) => v <= 100),
     ),
     () => 0,
   ),
   customError(
-    either<number>(
+    either(
       condition<number>((v) => !(v % 2)),
       condition<number>((v) => !(v % 3)),
     ),

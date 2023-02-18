@@ -40,31 +40,31 @@ export function tryCatch<Input, TryBranch, CatchBranch>(
   }) as Pipeable<Input, TryBranch | CatchBranch>;
 }
 
-export function both<Input>(
-  firstPipeable: Pipeable<Input, unknown>,
-  secondPipeable: Pipeable<Input, unknown>,
+export function both<FirstInput, SecondInput>(
+  firstPipeable: Pipeable<FirstInput, unknown>,
+  secondPipeable: Pipeable<SecondInput, unknown>,
 ) {
   return ((value) => {
-    firstPipeable(value);
-    secondPipeable(value);
+    firstPipeable(value as never);
+    secondPipeable(value as never);
 
     return value;
-  }) as Pipeable<Input, Input>;
+  }) as Pipeable<FirstInput | SecondInput, FirstInput | SecondInput>;
 }
 
-export function either<Input>(
-  firstPipeable: Pipeable<Input, unknown>,
-  secondPipeable: Pipeable<Input, unknown>,
+export function either<FirstInput, SecondInput>(
+  firstPipeable: Pipeable<FirstInput, unknown>,
+  secondPipeable: Pipeable<SecondInput, unknown>,
 ) {
   return ((value) => {
     try {
-      firstPipeable(value);
+      firstPipeable(value as never);
     } catch {
-      secondPipeable(value);
+      secondPipeable(value as never);
     }
 
     return value;
-  }) as Pipeable<Input, Input>;
+  }) as Pipeable<FirstInput | SecondInput, FirstInput | SecondInput>;
 }
 
 export function customError<Input, Output>(

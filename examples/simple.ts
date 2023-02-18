@@ -1,47 +1,42 @@
-import { and, or, filter, match, option, pipe } from "../src";
+import {
+  condition,
+  ifElse,
+  tryCatch,
+  pipe,
+  customError,
+  createError,
+  either,
+  both,
+} from "../src";
 
 const simplePipe = pipe(
-  match([
-    option<string, number>(
-      (v) => typeof v === "string",
-      (v) => +v,
+  tryCatch(
+    both<number>(
+      condition<number>((v) => v > 0),
+      condition<number>((v) => v <= 100),
     ),
-    option<number, number>(
-      (v) => typeof v === "number",
-      (v) => v,
-    ),
-  ]),
-  and(
-    filter<number>((v) => v > 0),
-    filter<number>((v) => v <= 100),
+    () => 0,
   ),
-  match([
-    option<number, "1/4">(
-      (v) => v <= 25,
-      () => "1/4",
+  customError(
+    either<number>(
+      condition<number>((v) => !(v % 2)),
+      condition<number>((v) => !(v % 3)),
     ),
-    option<number, "2/4">(
-      (v) => v <= 50,
-      () => "2/4",
-    ),
-    option<number, "3/4">(
-      (v) => v <= 75,
-      () => "3/4",
-    ),
-    option<number, "4/4">(
-      () => true,
-      () => "4/4",
-    ),
-  ]),
-  or(
-    filter<string>((v) => +v[0] === 2),
-    filter<string>((v) => +v[0] === 4),
+    createError("DIVIDABLE", (value) => ({ value, by: [2, 3] })),
+  ),
+  ifElse(
+    (v) => v >= 50,
+    () => "4/4",
+    () => "2/4",
   ),
   (v) => `Result: ${v}`,
 );
 
+// Error: { reason: "DIVIDABLE", value: 35, by: [2, 3] }
+// console.log(simplePipe(35));
+
 // Result: 2/4
-console.log(simplePipe("35"));
+console.log(simplePipe(-25));
 
 // Result: 4/4
 console.log(simplePipe(80));

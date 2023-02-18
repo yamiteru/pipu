@@ -8,54 +8,61 @@ Pipeables are functions that you can put into a pipe (pipe itself is `Pipeable`)
 
 We try to make the number of core pipeables as low as possible so it's easy to build your own abstractions on top it.
 
-### Filter
+### condition
 
-Passes the input value to the next `Pipeable` if predicate returns true. Otherwise `filter` throws.
-
-```ts
-filter<number>((v) => !(v % 2));
-```
-
-### Match
-
-Passes the result of one of the options to the next `Pipeable` if one of the predicates returns true. Otherwise `match` throws. Throws from sub-pipeables are bubbled to the top.
+Passes the input value to the next `Pipeable` if predicate returns true. Otherwise `condition` throws.
 
 ```ts
-match<number, ["even", "odd", "default"]>([
-  [isEven, () => "even"],
-  [isOdd, () => "odd"],
-  [() => true, () => "default"],
-]);
+condition<number>((v) => !(v % 2));
 ```
 
-### And
+### ifElse
+
+```ts
+ifElse(
+  (v) => !(v % 2),
+  () => "even",
+  () => "odd",
+);
+```
+
+### both
 
 Passes the input value to the next `Pipeable` if no sub-pipeable throws. If one of them throws then the thrown object bubbles to the top.
 
 ```ts
-and<number>(
+both<number>(
   filter<string>((v) => v > 0),
   filter<string>((v) => v < 150),
 );
 ```
 
-### Or
+### either
 
-Passes the input values to the next `Pipeable` if at least one of the sub-pipeables does not throw. If all of them throw then `or` throws.
+Passes the input values to the next `Pipeable` if at least one of the sub-pipeables does not throw. If the second one throws then the thrown object bubbles to the top.
 
 ```ts
-or<string>(
+either<string>(
   filter<string>((v) => v[0] === "a"),
   filter<string>((v) => v[0] === "b"),
 );
 ```
 
-### Wrap
-
-It wraps a pipeable and let's you to modify its error for when it throws. If the child pipeable threw a non-object or an instance of `Error` then it's ignored and substituted with an empty object.
+### tryCatch
 
 ```ts
-wrap<number>(
+tryCatch(
+  filter(...),
+  () => "default"
+);
+```
+
+### customError
+
+It wraps a pipeable and let's you to modify its error. If the child pipeable threw a non-object or an instance of `Error` then it's ignored and substituted with an empty object.
+
+```ts
+customError<number>(
   filter<number>(...),
   (v, error) => ({ ...error, message: `Value ${v} is invalid` })
 )
@@ -84,4 +91,4 @@ Some of the utils throw objects that act as custom errors when a condition is no
 It's recommended to stick to this convention in your own pipeables.
 utilities
 
-You can use `error` function to throw your own custom errors that adhere to the convention stated above.
+You can use `createError` function to create and throw your own custom errors that adhere to the convention stated above.

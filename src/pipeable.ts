@@ -1,18 +1,9 @@
-import type {
-  InferOptionInputs,
-  InferOptionOutputs,
-  InferPipeableInputs,
-  ObjectAny,
-  Pipeable,
-  PipeableAny,
-  Predicate,
-  PredicateAny,
-} from "./types";
-import { error } from "./utils";
+import type { ObjectAny, Pipeable, Predicate } from "./types";
+import { createError } from "./utils";
 
-const filterError = error("FILTER");
+const filterError = createError("CONDITION");
 
-export function filter<Input>(predicate: Predicate<Input>) {
+export function condition<Input>(predicate: Predicate<Input>) {
   return ((value) => {
     if (!predicate(value)) {
       throw filterError(value);
@@ -22,63 +13,61 @@ export function filter<Input>(predicate: Predicate<Input>) {
   }) as Pipeable<Input, Input>;
 }
 
-const matchError = error("MATCH");
-
-export function match<Options extends [PredicateAny, PipeableAny][]>(
-  options: Options,
+export function ifElse<Input, TrueBranch, FalseBranch>(
+  predicate: Predicate<Input>,
+  trueBranch: Pipeable<Input, TrueBranch>,
+  falseBranch: Pipeable<Input, FalseBranch>,
 ) {
-  const length = options.length;
-
   return ((value) => {
-    for (let i = 0; i < length; ++i) {
-      const [predicate, output] = options[i];
-
-      if (predicate(value)) {
-        return output(value);
-      }
+    if (predicate(value)) {
+      return trueBranch(value);
     }
 
-    throw matchError(value);
-  }) as Pipeable<InferOptionInputs<Options>, InferOptionOutputs<Options>>;
+    return falseBranch(value);
+  }) as Pipeable<Input, TrueBranch | FalseBranch>;
 }
 
-export function and<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
-  const length = pipeables.length;
-
+export function tryCatch<Input, TryBranch, CatchBranch>(
+  tryBranch: Pipeable<Input, TryBranch>,
+  catchBranch: Pipeable<Input, CatchBranch>,
+) {
   return ((value) => {
-    for (let i = 0; i < length; ++i) {
-      pipeables[i](value);
+    try {
+      return tryBranch(value);
+    } catch {
+      return catchBranch(value);
+    }
+  }) as Pipeable<Input, TryBranch | CatchBranch>;
+}
+
+export function both<Input>(
+  firstPipeable: Pipeable<Input, unknown>,
+  secondPipeable: Pipeable<Input, unknown>,
+) {
+  return ((value) => {
+    firstPipeable(value);
+    secondPipeable(value);
+
+    return value;
+  }) as Pipeable<Input, Input>;
+}
+
+export function either<Input>(
+  firstPipeable: Pipeable<Input, unknown>,
+  secondPipeable: Pipeable<Input, unknown>,
+) {
+  return ((value) => {
+    try {
+      firstPipeable(value);
+    } catch {
+      secondPipeable(value);
     }
 
     return value;
-  }) as Pipeable<
-    InferPipeableInputs<Pipeables>,
-    InferPipeableInputs<Pipeables>
-  >;
+  }) as Pipeable<Input, Input>;
 }
 
-const orError = error("OR");
-
-export function or<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
-  const length = pipeables.length;
-
-  return ((value) => {
-    for (let i = 0; i < length; ++i) {
-      try {
-        return pipeables[i](value);
-      } catch {
-        continue;
-      }
-    }
-
-    throw orError(value);
-  }) as Pipeable<
-    InferPipeableInputs<Pipeables>,
-    InferPipeableInputs<Pipeables>
-  >;
-}
-
-export function wrap<Input, Output>(
+export function customError<Input, Output>(
   pipeable: Pipeable<Input, Output>,
   error: (value: Input, error: ObjectAny) => ObjectAny,
 ) {

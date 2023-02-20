@@ -1,5 +1,5 @@
 import { Result, getOk, isErr, ok } from "elfs";
-import { Error, Pipeable } from "./types";
+import { Error, Pipeable } from "../types";
 
 // TODO: generate more types
 export function pipe<A, B1, B2 extends Error>(

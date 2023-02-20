@@ -1,23 +1,22 @@
-import { pipe, and, or, filter, map } from "../src";
+import { Result, getErr, getOk, isOk } from "elfs";
+import { pipe, filter, map, error, errorTuple } from "../src";
 
-// TODO: get rid of all the ": number"
 const customPipe = pipe(
   filter((v: number) => !(v % 2)),
-  map((v: number) => v * 2),
-  and(
-    filter((v: number) => v >= 20),
-    filter((v: number) => v <= 30),
+  error(
+    map((v) => v * 2),
+    (value) => errorTuple("TEST", value),
   ),
-  or(
-    filter((v: number) => v - 20 === 4),
-    filter((v: number) => v - 20 === 8),
-  ),
-  filter(
-    (v: number) => v === 24,
-    map((v) => `${v} === 24`),
-    map((v) => `${v} === 28`),
-  ),
+  pipe(map((v) => v * 2)),
+  map((v) => `${v}`),
 );
 
-console.log(customPipe(1));
-console.log(customPipe(12));
+const log = <$Result extends Result>(result: $Result) => {
+  console.log(result, isOk(result), getOk(result), getErr(result));
+};
+
+// error
+log(customPipe(1));
+
+// '48'
+log(customPipe(12));

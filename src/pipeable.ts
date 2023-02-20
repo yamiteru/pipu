@@ -1,4 +1,5 @@
 import type {
+  Either,
   Error,
   InferPipeableArrayError,
   InferPipeableArrayInput,
@@ -8,12 +9,15 @@ import type {
   Predicate,
   Result,
   ResultAny,
+  ResultErr,
   ResultOk,
 } from "./types";
 import { err, getErr, isErr, isOk, ok, pipeError } from "./utils";
 
-export function filter<Input>(predicate: Predicate<Input>) {
-  return (value: Input) => {
+export function filter<Input>(
+  predicate: Predicate<Input>,
+): Pipeable<Input, Result<Input, Error<"CONDITION", Input>>> {
+  return (value) => {
     if (!predicate(value)) {
       return err(pipeError("CONDITION", value));
     }
@@ -22,8 +26,10 @@ export function filter<Input>(predicate: Predicate<Input>) {
   };
 }
 
-export function map<Input, Output>(fn: (value: Input) => Output) {
-  return (value: Input) => {
+export function map<Input, Output>(
+  fn: (value: Input) => Output,
+): Pipeable<Input, Result<Output, Error>> {
+  return (value) => {
     return ok(fn(value));
   };
 }
@@ -36,8 +42,8 @@ export function ifElse<
   predicate: Predicate<Input>,
   trueBranch: Pipeable<Input, TrueResult>,
   falseBranch: Pipeable<Input, FalseResult>,
-) {
-  return (value: Input) => {
+): Pipeable<Input, Either<TrueResult, FalseResult>> {
+  return (value) => {
     if (predicate(value)) {
       return trueBranch(value);
     }
@@ -46,10 +52,18 @@ export function ifElse<
   };
 }
 
-export function and<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
+export function and<Pipeables extends PipeableAny[]>(
+  ...pipeables: Pipeables
+): Pipeable<
+  InferPipeableArrayInput<Pipeables>,
+  Either<
+    InferPipeableArrayError<Pipeables>,
+    ResultOk<InferPipeableArrayInput<Pipeables>>
+  >
+> {
   const length = pipeables.length;
 
-  return (value: InferPipeableArrayInput<Pipeables>) => {
+  return (value) => {
     for (let i = 0; i < length; ++i) {
       const result = pipeables[i](value);
 
@@ -62,10 +76,18 @@ export function and<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
   };
 }
 
-export function or<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
+export function or<Pipeables extends PipeableAny[]>(
+  ...pipeables: Pipeables
+): Pipeable<
+  InferPipeableArrayInput<Pipeables>,
+  Either<
+    InferPipeableArrayOk<Pipeables>,
+    ResultErr<Error<"OR", InferPipeableArrayInput<Pipeables>>>
+  >
+> {
   const length = pipeables.length;
 
-  return (value: InferPipeableArrayInput<Pipeables>) => {
+  return (value) => {
     for (let i = 0; i < length; ++i) {
       const result = pipeables[i](value);
 
@@ -86,8 +108,8 @@ export function customError<
 >(
   pipeable: Pipeable<Input, Result<Output, InputError>>,
   error: (value: Input, error: InputError) => OutputError,
-) {
-  return (value: Input) => {
+): Pipeable<Input, Either<ResultOk<Output>, ResultErr<OutputError>>> {
+  return (value) => {
     const result = pipeable(value);
 
     if (isErr(result)) {

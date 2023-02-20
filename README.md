@@ -10,26 +10,27 @@ We try to make the number of core pipeables as low as possible so it's easy to b
 
 ### filter
 
-Passes the input value to the next `Pipeable` if predicate returns true. Otherwise `filter` returns `Error`.
+Passes the input value to the next `Pipeable` if predicate returns true and/or `truePipeable`/`falsePipeable` return `Ok`. Otherwise `cond` returns `Error`.
 
 ```ts
 filter<number>((v) => !(v % 2));
+
+filter<number>(
+  (v) => !(v % 2),
+  () => ok("even"),
+);
+
+filter<number>(
+  (v) => !(v % 2),
+  () => ok("even"),
+  () => ok("odd"),
+);
 ```
 
 ### map
 
 ```ts
 map<number, string>((v) => `${v}`);
-```
-
-### ifElse
-
-```ts
-ifElse(
-  (v) => !(v % 2),
-  () => "even",
-  () => "odd",
-);
 ```
 
 ### and
@@ -54,14 +55,14 @@ or(
 );
 ```
 
-### customError
+### error
 
 It let's you modify error of a sub-pipeable.
 
 ```ts
-customError(
+error(
   filter<number>(...),
-  (value, error) => ({ reason: "TEST", value, child: error })
+  (value, error) => ["TEST", value, { error }]
 )
 ```
 

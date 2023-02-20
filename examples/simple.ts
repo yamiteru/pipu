@@ -1,13 +1,23 @@
-import { customError, filter, map, pipe, pipeError } from "../src";
+import { pipe, and, or, filter, map } from "../src";
 
+// TODO: get rid of all the ": number"
 const customPipe = pipe(
-  filter<number>((v) => v > 10),
-  customError(
-    map((v) => `${v}`),
-    (value) => pipeError("MAP", value),
+  filter((v: number) => !(v % 2)),
+  map((v: number) => v * 2),
+  and(
+    filter((v: number) => v >= 20),
+    filter((v: number) => v <= 30),
   ),
-  filter<string>((v) => v.includes("0")),
+  or(
+    filter((v: number) => v - 20 === 4),
+    filter((v: number) => v - 20 === 8),
+  ),
+  filter(
+    (v: number) => v === 24,
+    map((v) => `${v} === 24`),
+    map((v) => `${v} === 28`),
+  ),
 );
 
 console.log(customPipe(1));
-console.log(customPipe(2));
+console.log(customPipe(12));

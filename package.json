@@ -63,5 +63,8 @@
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
     "typescript": "next"
+  },
+  "dependencies": {
+    "elfs": "0.0.5"
   }
 }

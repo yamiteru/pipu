@@ -1,25 +1,31 @@
 import type {
-  Either,
   Error,
-  InferResultErr,
-  InferResultOk,
+  InferPipeableArrayError,
+  InferPipeableArrayInput,
+  InferPipeableArrayOk,
   Pipeable,
+  PipeableAny,
   Predicate,
   Result,
   ResultAny,
-  ResultErr,
   ResultOk,
 } from "./types";
 import { err, getErr, isErr, isOk, ok, pipeError } from "./utils";
 
-export function condition<Input>(predicate: Predicate<Input>) {
-  return ((value) => {
+export function filter<Input>(predicate: Predicate<Input>) {
+  return (value: Input) => {
     if (!predicate(value)) {
       return err(pipeError("CONDITION", value));
     }
 
     return ok(value);
-  }) satisfies Pipeable<Input, Result<Input, Error>>;
+  };
+}
+
+export function map<Input, Output>(fn: (value: Input) => Output) {
+  return (value: Input) => {
+    return ok(fn(value));
+  };
 }
 
 export function ifElse<
@@ -31,92 +37,63 @@ export function ifElse<
   trueBranch: Pipeable<Input, TrueResult>,
   falseBranch: Pipeable<Input, FalseResult>,
 ) {
-  return ((value) => {
+  return (value: Input) => {
     if (predicate(value)) {
       return trueBranch(value);
     }
 
     return falseBranch(value);
-  }) satisfies Pipeable<Input, Either<TrueResult, FalseResult>>;
+  };
 }
 
-export function both<
-  FirstInput,
-  FirstResult extends ResultAny,
-  SecondInput,
-  SecondResult extends ResultAny,
->(
-  firstPipeable: Pipeable<FirstInput, FirstResult>,
-  secondPipeable: Pipeable<SecondInput, SecondResult>,
-) {
-  return ((value) => {
-    const first = firstPipeable(value as FirstInput);
+export function and<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
+  const length = pipeables.length;
 
-    if (isErr(first)) return first;
+  return (value: InferPipeableArrayInput<Pipeables>) => {
+    for (let i = 0; i < length; ++i) {
+      const result = pipeables[i](value);
 
-    const second = secondPipeable(value as SecondInput);
-
-    if (isErr(second)) return second;
+      if (isErr(result)) {
+        return result as InferPipeableArrayError<Pipeables>;
+      }
+    }
 
     return ok(value);
-  }) satisfies Pipeable<
-    Either<FirstInput, SecondInput>,
-    Either<
-      Either<
-        ResultErr<InferResultErr<FirstResult>>,
-        ResultErr<InferResultErr<SecondResult>>
-      >,
-      ResultOk<Either<FirstInput, SecondInput>>
-    >
-  >;
+  };
 }
 
-export function either<
-  FirstInput,
-  FirstResult extends ResultAny,
-  SecondInput,
-  SecondResult extends ResultAny,
->(
-  firstPipeable: Pipeable<FirstInput, FirstResult>,
-  secondPipeable: Pipeable<SecondInput, SecondResult>,
-) {
-  return ((value) => {
-    const first = firstPipeable(value as never);
+export function or<Pipeables extends PipeableAny[]>(...pipeables: Pipeables) {
+  const length = pipeables.length;
 
-    if (isOk(first)) return first;
+  return (value: InferPipeableArrayInput<Pipeables>) => {
+    for (let i = 0; i < length; ++i) {
+      const result = pipeables[i](value);
 
-    const second = secondPipeable(value as never);
+      if (isOk(result)) {
+        return result as InferPipeableArrayOk<Pipeables>;
+      }
+    }
 
-    if (isOk(second)) return second;
-
-    return err(pipeError("EITHER", value));
-  }) satisfies Pipeable<
-    Either<FirstInput, SecondInput>,
-    Either<
-      Either<
-        ResultOk<InferResultOk<FirstResult>>,
-        ResultOk<InferResultOk<SecondResult>>
-      >,
-      ResultErr
-    >
-  >;
+    return err(pipeError("OR", value));
+  };
 }
 
 export function customError<
   Input,
+  Output,
   InputError extends Error,
   OutputError extends Error,
 >(
-  pipeable: Pipeable<Input, Result<Input, InputError>>,
+  pipeable: Pipeable<Input, Result<Output, InputError>>,
   error: (value: Input, error: InputError) => OutputError,
 ) {
-  return ((value) => {
+  return (value: Input) => {
     const result = pipeable(value);
 
     if (isErr(result)) {
       return err(error(value, getErr(result)));
     }
 
-    return result as ResultOk<Input>;
-  }) satisfies Pipeable<Input, Result<Input, OutputError>>;
+    return result as ResultOk<Output>;
+  };
 }

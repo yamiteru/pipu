@@ -26,7 +26,49 @@ export type PipeableInput<Input> = Pipeable<Input, any>;
 
 export type PipeableOutput<Output extends ResultAny> = Pipeable<any, Output>;
 
+export type InferPipeableInput<P extends PipeableAny> = P extends Pipeable<
+  infer Input,
+  any
+>
+  ? Input
+  : never;
+
+export type InferPipeableArrayInput<Pipeables extends PipeableAny[]> = {
+  [Key in keyof Pipeables]: InferPipeableInput<Pipeables[Key]>;
+}[number];
+
+export type InferPipeableError<P extends PipeableAny> = P extends Pipeable<
+  any,
+  infer Result
+>
+  ? Result extends ResultErr<infer Err>
+    ? ResultErr<Err>
+    : never
+  : never;
+
+export type InferPipeableArrayError<Pipeables extends PipeableAny[]> = {
+  [Key in keyof Pipeables]: InferPipeableError<Pipeables[Key]>;
+}[number];
+
+export type InferPipeableOk<P extends PipeableAny> = P extends Pipeable<
+  any,
+  infer Result
+>
+  ? Result extends ResultOk<infer Ok>
+    ? ResultOk<Ok>
+    : never
+  : never;
+
+export type InferPipeableArrayOk<Pipeables extends PipeableAny[]> = {
+  [Key in keyof Pipeables]: InferPipeableOk<Pipeables[Key]>;
+}[number];
+
 export type Either<Left, Right> = Left | Right;
+
+export type Pattern<Input, Output> = [
+  Predicate<Input>,
+  (value: Input) => Output,
+];
 
 export type None = typeof NONE;
 

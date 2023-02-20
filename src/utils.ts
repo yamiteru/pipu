@@ -1,13 +1,4 @@
-import {
-  InferResultErr,
-  InferResultOk,
-  None,
-  ObjectAny,
-  Result,
-  ResultAny,
-  ResultErr,
-  ResultOk,
-} from "./types";
+import { ObjectAny, Pattern, ResultAny, ResultErr, ResultOk } from "./types";
 
 const emptyProps = () => ({});
 
@@ -53,8 +44,24 @@ export const getOk = <R extends ResultAny>(result: R) => result[0];
 
 export const getErr = <R extends ResultAny>(result: R) => result[1];
 
-export const match = <R extends ResultAny, OkOutput, ErrOutput>(
-  result: R,
-  onOk: (value: InferResultOk<R>) => OkOutput,
-  onErr: (value: InferResultErr<R>) => ErrOutput,
-) => (isOk(result) ? onOk(getOk(result)) : onErr(getErr(result)));
+export function match<Input, Outputs extends unknown[]>(
+  input: Input,
+  ...patterns: {
+    [Key in keyof Outputs]: Pattern<Input, Outputs[Key]>;
+  }
+): Outputs[number] {
+  const length = patterns.length;
+
+  for (let i = 0; i < length; ++i) {
+    const [predicate, output] = patterns[i];
+
+    if (predicate(input)) return output(input);
+  }
+}
+export const Ok = <Input extends ResultAny, Output>(
+  fn: (value: Input) => Output,
+) => [isOk, fn] satisfies Pattern<Input, Output>;
+
+export const Err = <Input extends ResultAny, Output>(
+  fn: (value: Input) => Output,
+) => [isErr, fn] satisfies Pattern<Input, Output>;

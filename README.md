@@ -8,12 +8,18 @@ Pipeables are functions that you can put into a pipe (pipe itself is `Pipeable`)
 
 We try to make the number of core pipeables as low as possible so it's easy to build your own abstractions on top it.
 
-### condition
+### filter
 
-Passes the input value to the next `Pipeable` if predicate returns true. Otherwise `condition` throws.
+Passes the input value to the next `Pipeable` if predicate returns true. Otherwise `filter` returns `Error`.
 
 ```ts
-condition<number>((v) => !(v % 2));
+filter<number>((v) => !(v % 2));
+```
+
+### map
+
+```ts
+map<number, string>((v) => `${v}`);
 ```
 
 ### ifElse
@@ -26,23 +32,23 @@ ifElse(
 );
 ```
 
-### both
+### and
 
-Passes the input value to the next `Pipeable` if no sub-pipeable throws. If one of them throws then the thrown object bubbles to the top.
+Passes the input value to the next `Pipeable` if no sub-pipeable returns `Error`.
 
 ```ts
-both<number>(
+and(
   filter<string>((v) => v > 0),
   filter<string>((v) => v < 150),
 );
 ```
 
-### either
+### or
 
-Passes the input values to the next `Pipeable` if at least one of the sub-pipeables does not throw. If the second one throws then the thrown object bubbles to the top.
+Passes the input values to the next `Pipeable` if at least one of the sub-pipeables does not return `Error`.
 
 ```ts
-either<string>(
+or(
   filter<string>((v) => v[0] === "a"),
   filter<string>((v) => v[0] === "b"),
 );
@@ -50,21 +56,13 @@ either<string>(
 
 ### customError
 
-It wraps a pipeable and let's you to modify its error. If the child pipeable threw a non-object or an instance of `Error` then it's ignored and substituted with an empty object.
+It let's you modify error of a sub-pipeable.
 
 ```ts
-customError<number>(
+customError(
   filter<number>(...),
   (value, error) => ({ reason: "TEST", value, child: error })
 )
-```
-
-### map
-
-Just use an anonymouse fat arrow function. A custom map function would be redundant.
-
-```ts
-pipe((value: number) => value * 2);
 ```
 
 ## Errors

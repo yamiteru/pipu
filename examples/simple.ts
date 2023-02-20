@@ -1,8 +1,12 @@
-import { condition, customError } from "../src";
+import { customError, filter, map, pipe, pipeError } from "../src";
 
-const customPipe = customError(
-  condition<number>((v) => !(v % 2)),
-  (value, e) => ({ reason: "TEST", value, subReason: e.reason } as const),
+const customPipe = pipe(
+  filter<number>((v) => v > 10),
+  customError(
+    map((v) => `${v}`),
+    (value) => pipeError("MAP", value),
+  ),
+  filter<string>((v) => v.includes("0")),
 );
 
 console.log(customPipe(1));

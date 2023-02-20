@@ -1,18 +1,25 @@
-import { Error, Pipeable, PipeableAny, Result } from "./types";
+import { Pipeable, PipeableAny, Result } from "./types";
 import { getOk, isErr, ok } from "./utils";
 
-export function pipe<A, B>(
-  ab: Pipeable<A, Result<B, Error>>,
-): Pipeable<A, Result<B, Error>>;
-export function pipe<A, B, C>(
-  ab: Pipeable<A, Result<B, Error>>,
-  bc: Pipeable<B, Result<C, Error>>,
-): Pipeable<A, Result<C, Error>>;
-export function pipe<A, B, C, D>(
-  ab: Pipeable<A, Result<B, Error>>,
-  bc: Pipeable<B, Result<C, Error>>,
-  cd: Pipeable<C, Result<D, Error>>,
-): Pipeable<A, Result<D, Error>>;
+// TODO: generate more types
+export function pipe<A, B1, B2>(
+  ab: Pipeable<A, Result<B1, B2>>,
+): Pipeable<A, Result<B1, B2>>;
+export function pipe<A, B1, B2, C1, C2>(
+  ab: Pipeable<A, Result<B1, B2>>,
+  bc: Pipeable<B1, Result<C1, C2>>,
+): Pipeable<A, Result<C1, B2 | C2>>;
+export function pipe<A, B1, B2, C1, C2, D1, D2>(
+  ab: Pipeable<A, Result<B1, B2>>,
+  bc: Pipeable<B1, Result<C1, C2>>,
+  cd: Pipeable<C1, Result<D1, D2>>,
+): Pipeable<A, Result<D1, B2 | C2 | D2>>;
+export function pipe<A, B1, B2, C1, C2, D1, D2, E1, E2>(
+  ab: Pipeable<A, Result<B1, B2>>,
+  bc: Pipeable<B1, Result<C1, C2>>,
+  cd: Pipeable<C1, Result<D1, D2>>,
+  de: Pipeable<D1, Result<E1, E2>>,
+): Pipeable<A, Result<E1, B2 | C2 | D2 | E2>>;
 /*
   The provided functions are executed in sequence where the return value
   from the last executed function is passed into the next function.

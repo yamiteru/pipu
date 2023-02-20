@@ -1,22 +1,35 @@
-import type { ObjectAny, Pipeable, Predicate } from "./types";
-import { createError } from "./utils";
-
-const filterError = createError("CONDITION");
+import type {
+  Either,
+  Error,
+  InferResultErr,
+  InferResultOk,
+  Pipeable,
+  Predicate,
+  Result,
+  ResultAny,
+  ResultErr,
+  ResultOk,
+} from "./types";
+import { err, getErr, isErr, isOk, ok, pipeError } from "./utils";
 
 export function condition<Input>(predicate: Predicate<Input>) {
   return ((value) => {
     if (!predicate(value)) {
-      throw filterError(value);
+      return err(pipeError("CONDITION", value));
     }
 
-    return value;
-  }) as Pipeable<Input, Input>;
+    return ok(value);
+  }) satisfies Pipeable<Input, Result<Input, Error>>;
 }
 
-export function ifElse<Input, TrueBranch, FalseBranch>(
+export function ifElse<
+  Input,
+  TrueResult extends ResultAny,
+  FalseResult extends ResultAny,
+>(
   predicate: Predicate<Input>,
-  trueBranch: Pipeable<Input, TrueBranch>,
-  falseBranch: Pipeable<Input, FalseBranch>,
+  trueBranch: Pipeable<Input, TrueResult>,
+  falseBranch: Pipeable<Input, FalseResult>,
 ) {
   return ((value) => {
     if (predicate(value)) {
@@ -24,65 +37,86 @@ export function ifElse<Input, TrueBranch, FalseBranch>(
     }
 
     return falseBranch(value);
-  }) as Pipeable<Input, TrueBranch | FalseBranch>;
+  }) satisfies Pipeable<Input, Either<TrueResult, FalseResult>>;
 }
 
-export function tryCatch<Input, TryBranch, CatchBranch>(
-  tryBranch: Pipeable<Input, TryBranch>,
-  catchBranch: Pipeable<Input, CatchBranch>,
+export function both<
+  FirstInput,
+  FirstResult extends ResultAny,
+  SecondInput,
+  SecondResult extends ResultAny,
+>(
+  firstPipeable: Pipeable<FirstInput, FirstResult>,
+  secondPipeable: Pipeable<SecondInput, SecondResult>,
 ) {
   return ((value) => {
-    try {
-      return tryBranch(value);
-    } catch {
-      return catchBranch(value);
+    const first = firstPipeable(value as FirstInput);
+
+    if (isErr(first)) return first;
+
+    const second = secondPipeable(value as SecondInput);
+
+    if (isErr(second)) return second;
+
+    return ok(value);
+  }) satisfies Pipeable<
+    Either<FirstInput, SecondInput>,
+    Either<
+      Either<
+        ResultErr<InferResultErr<FirstResult>>,
+        ResultErr<InferResultErr<SecondResult>>
+      >,
+      ResultOk<Either<FirstInput, SecondInput>>
+    >
+  >;
+}
+
+export function either<
+  FirstInput,
+  FirstResult extends ResultAny,
+  SecondInput,
+  SecondResult extends ResultAny,
+>(
+  firstPipeable: Pipeable<FirstInput, FirstResult>,
+  secondPipeable: Pipeable<SecondInput, SecondResult>,
+) {
+  return ((value) => {
+    const first = firstPipeable(value as never);
+
+    if (isOk(first)) return first;
+
+    const second = secondPipeable(value as never);
+
+    if (isOk(second)) return second;
+
+    return err(pipeError("EITHER", value));
+  }) satisfies Pipeable<
+    Either<FirstInput, SecondInput>,
+    Either<
+      Either<
+        ResultOk<InferResultOk<FirstResult>>,
+        ResultOk<InferResultOk<SecondResult>>
+      >,
+      ResultErr
+    >
+  >;
+}
+
+export function customError<
+  Input,
+  InputError extends Error,
+  OutputError extends Error,
+>(
+  pipeable: Pipeable<Input, Result<Input, InputError>>,
+  error: (value: Input, error: InputError) => OutputError,
+) {
+  return ((value) => {
+    const result = pipeable(value);
+
+    if (isErr(result)) {
+      return err(error(value, getErr(result)));
     }
-  }) as Pipeable<Input, TryBranch | CatchBranch>;
-}
 
-export function both<FirstInput, SecondInput>(
-  firstPipeable: Pipeable<FirstInput, unknown>,
-  secondPipeable: Pipeable<SecondInput, unknown>,
-) {
-  return ((value) => {
-    firstPipeable(value as never);
-    secondPipeable(value as never);
-
-    return value;
-  }) as Pipeable<FirstInput | SecondInput, FirstInput | SecondInput>;
-}
-
-export function either<FirstInput, SecondInput>(
-  firstPipeable: Pipeable<FirstInput, unknown>,
-  secondPipeable: Pipeable<SecondInput, unknown>,
-) {
-  return ((value) => {
-    try {
-      firstPipeable(value as never);
-    } catch {
-      secondPipeable(value as never);
-    }
-
-    return value;
-  }) as Pipeable<FirstInput | SecondInput, FirstInput | SecondInput>;
-}
-
-export function customError<Input, Output>(
-  pipeable: Pipeable<Input, Output>,
-  error: (value: Input, error: ObjectAny) => ObjectAny,
-) {
-  return ((value) => {
-    try {
-      return pipeable(value);
-    } catch (maybeError) {
-      throw error(
-        value,
-        maybeError !== null &&
-          typeof maybeError === "object" &&
-          maybeError instanceof Error === false
-          ? (maybeError as ObjectAny)
-          : {},
-      );
-    }
-  }) as Pipeable<Input, Output>;
+    return result as ResultOk<Input>;
+  }) satisfies Pipeable<Input, Result<Input, OutputError>>;
 }

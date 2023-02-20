@@ -48,15 +48,6 @@ either<string>(
 );
 ```
 
-### tryCatch
-
-```ts
-tryCatch(
-  filter(...),
-  () => "default"
-);
-```
-
 ### customError
 
 It wraps a pipeable and let's you to modify its error. If the child pipeable threw a non-object or an instance of `Error` then it's ignored and substituted with an empty object.
@@ -64,11 +55,11 @@ It wraps a pipeable and let's you to modify its error. If the child pipeable thr
 ```ts
 customError<number>(
   filter<number>(...),
-  (v, error) => ({ ...error, message: `Value ${v} is invalid` })
+  (value, error) => ({ reason: "TEST", value, child: error })
 )
 ```
 
-### Map
+### map
 
 Just use an anonymouse fat arrow function. A custom map function would be redundant.
 
@@ -78,17 +69,10 @@ pipe((value: number) => value * 2);
 
 ## Errors
 
-Some of the utils throw objects that act as custom errors when a condition is not met. For example when you filter and a predicate returns false it stops futher execution and throws an object which looks like this:
+Are you a soy boi who uses `try/catch` and later on cries alone in the corner because `try/catch` sucks? You no longer have to be!
 
-```ts
-{
-  reason: string;
-  value: unknown;
-  [key: string]: unknown;
-}
-```
+In Pipem we use `Result<Ok, Err>` for all pipeables. We have an `Error` type and a handful of utils to help you work with `Result` like `isOk`/`isErr`/`getOk`/`getErr`/`match`/etc.
 
-It's recommended to stick to this convention in your own pipeables.
-utilities
+If your pipeable throws it means that you have an unhandled behavior that needs to be put in order with `err`! Named errors are better than un-named.
 
-You can use `createError` function to create and throw your own custom errors that adhere to the convention stated above.
+If you intentionally throw your pp is gonna shrink.

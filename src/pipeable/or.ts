@@ -1477,6 +1477,16 @@ export function or<
     >
   >
 >;
+/**
+ * Pipeable which takes N number of pipeables and returns either `Ok` returned by any of the pipeables or `Err` if none of the pipeables returned `Ok`.
+ *
+ * @example
+ * // Pipeable<number, Result<number, Error<"OR", number>>>
+ * const customPipe = or(
+ *   filter((v: number) => !(v % 2)),
+ *   filter((v: number) => !(v % 3)),
+ * );
+ * */
 export function or(...pipeables: Pipeable[]) {
   const length = pipeables.length;
 

@@ -21,6 +21,11 @@ export function filter<
   truePipeable: Pipeable<$Input, $TrueResult>,
   falsePipeable: Pipeable<$Input, $FalseResult>,
 ): Pipeable<$Input, Either<[$TrueResult, $FalseResult]>>;
+/**
+ * Pipeable which runs either `truePipeable` or `falsePipeable` based on return value of `predicate`.
+ *
+ * By default `truePipeable` returns `Ok<$Input>` and `falsePipeable` returns `Err<Error<"FILTER", $Input>>`.
+ * */
 export function filter<
   $Input,
   $TrueResult extends Result,

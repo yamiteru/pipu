@@ -1,6 +1,10 @@
 import { ObjectAny, Fn } from "elfs";
 import { Error } from "./types";
 
+/**
+ * Returns function which dynamically creates error tuple based on value and potential sub-error.
+ * It should mainly be used in `wrap` function as a second parameter.
+ * */
 export function error<
   $Reason extends string,
   $Input,

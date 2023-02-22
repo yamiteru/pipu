@@ -1233,6 +1233,21 @@ export function pipe<
     | Y2
   >
 >;
+/**
+ * Pipeable which takes N number of pipeables and return either `Ok` returned by the last pipeable or `Err` returned by any of the pipeables.
+ *
+ * Pipe is aliased to `and` because it naturally acts as &.
+ *
+ * @example
+ * // Pipeable<number, Result<string, Error<"FILTER", number> | Error<"CUSTOM", number>>>
+ * const customPipe = pipe(
+ *   filter((v: number) => !(v % 2)),
+ *   wrap(
+ *     map((v) => `${v}`),
+ *     error("CUSTOM")
+ *   )
+ * );
+ * */
 export function pipe(...pipeables: Pipeable[]) {
   const length = pipeables.length;
 

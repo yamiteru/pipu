@@ -92,8 +92,7 @@ If you intentionally throw your pp is gonna shrink.
 
 ## Limitations
 
-1. `or` cannot take `Pipeable`s with different input type
-2. `and`/`pipe` and `or` can take only up to 26 `Pipeable`s
+1. `and`/`pipe` and `or` can take up to 32 `Pipeable`s
 
 ---
 

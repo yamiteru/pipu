@@ -8,7 +8,6 @@ export type Error<
 
 export type Pipeable<$Input = any, $Output extends Result = Result> = (
   data: $Input,
-  id?: symbol,
 ) => $Output;
 
 export type PipeableInput<$Input> = Pipeable<$Input>;

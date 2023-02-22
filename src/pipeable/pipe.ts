@@ -1233,34 +1233,14 @@ export function pipe<
     | Y2
   >
 >;
-/*
-  The provided functions are executed in sequence where the return value
-  from the last executed function is passed into the next function.
+export function pipe(...pipeables: Pipeable[]) {
+  const length = pipeables.length;
 
-  Functions can stop function execution and force the pipe to
-  prematurely stop execution by throwing.
-
-  The maximum number of functions passed into a pipe is 24.
-  This is caused by TypeScript's inference limitations.
-
-  @param fs - List of functions that return T
-
-  @example
-  ```ts
-  const doubleEvenNumbersPipe = pipe(
-    filter((v: number) => !(v%2)),
-    map((v) => v * 2),
-  );
-  ```
-*/
-export function pipe(...fs: Pipeable[]) {
-  const length = fs.length;
-
-  return (value: unknown, id = Symbol()) => {
+  return (value: unknown) => {
     let latest = value;
 
     for (let i = 0; i < length; ++i) {
-      const result = fs[i](latest, id);
+      const result = pipeables[i](latest);
 
       if (isErr(result)) {
         return result;
@@ -1272,3 +1252,5 @@ export function pipe(...fs: Pipeable[]) {
     return ok(latest);
   };
 }
+
+export const and = pipe;

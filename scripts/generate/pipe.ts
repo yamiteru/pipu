@@ -1,34 +1,4 @@
-import { writeFile, mkdir } from "fs/promises";
-
-const ALPHABET = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-const LETTERS = ALPHABET.length;
+import { ALPHABET, LETTERS, saveGenerated } from "./shared";
 
 (async () => {
   let type = "";
@@ -56,11 +26,5 @@ const LETTERS = ALPHABET.length;
     )}): Pipeable<A1, Result<A1, ${resultErr.join("|")}>>;`;
   }
 
-  try {
-    await mkdir("generated");
-  } catch {
-    // I don't care
-  }
-
-  await writeFile("generated/pipe.ts", type);
+  await saveGenerated("pipe", type);
 })();

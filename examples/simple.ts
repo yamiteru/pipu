@@ -1,8 +1,11 @@
 import { Result, getErr, getOk, isOk } from "elfs";
-import { pipe, filter, map, error, errorTuple } from "../src";
+import { pipe, filter, map, error, errorTuple, or } from "../src";
 
 const customPipe = pipe(
-  filter((v: number) => !(v % 2)),
+  or(
+    filter((v: number) => !(v % 2)),
+    filter((v: number) => !(v % 3)),
+  ),
   error(
     map((v) => v * 2),
     (value) => errorTuple("TEST", value),

@@ -40,7 +40,8 @@
     "prepublishOnly": "pnpm build",
     "release": "release-it",
     "example:simple": "ts-node examples/simple.ts",
-    "generate:types:pipe": "ts-node scripts/generatePipeTypes.ts"
+    "generate:pipe": "ts-node scripts/generate/pipe.ts",
+    "generate:or": "ts-node scripts/generate/or.ts"
   },
   "devDependencies": {
     "@release-it/keep-a-changelog": "3.1.0",

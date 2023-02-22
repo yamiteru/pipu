@@ -10,7 +10,7 @@ We try to make the number of core pipeables as low as possible so it's easy to b
 
 ### filter
 
-Passes the input value to the next `Pipeable` if predicate returns true and/or `truePipeable`/`falsePipeable` return `Ok`. Otherwise `cond` returns `Error`.
+Passes the input value to the next `Pipeable` if predicate returns true and/or `truePipeable`/`falsePipeable` return `Ok`. Otherwise `filter` returns `Error`.
 
 ```ts
 filter((v: number) => !(v % 2));
@@ -41,8 +41,30 @@ It let's you modify error of a sub-pipeable.
 error(
   filter(...),
   (value, error) => errorTuple("TEST", value, { error })
-)
+);
 ```
+
+### and
+
+```ts
+and(
+  filter((v: number) => v > 0),
+  filter((v: number) => v <= 10),
+);
+```
+
+### or
+
+```ts
+or(
+  filter((v: number) => !(v % 2)),
+  filter((v: number) => !(v % 3)),
+);
+```
+
+### pipe
+
+Pipe is just `and`.
 
 ## Errors
 

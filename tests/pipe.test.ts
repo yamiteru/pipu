@@ -1,5 +1,5 @@
-import { err, ok } from "elfs";
-import { pipe } from "../src";
+import { err, getErr, getOk, isErr, isOk, ok } from "elfs";
+import { errorTuple, pipe } from "../src";
 
 describe("Pipe", () => {
   it("should create callable pipe", () => {
@@ -9,31 +9,32 @@ describe("Pipe", () => {
     expect(typeof testPipe).toBe("function");
   });
 
-  it("should execute all methods", () => {
+  it("should execute all methods and return Ok", () => {
     const testPipe = pipe(
       (v: number) => ok(v * 2),
       (v) => ok(`${v}`),
     );
 
-    const res = testPipe(1);
+    const result = testPipe(1);
 
-    expect(res).toBe("2");
+    expect(isOk(result)).toBe(true);
+    expect(getOk(result)).toBe("2");
   });
 
-  it("should stop execution and throw on error", () => {
+  it("should stop execution and return Error", () => {
     const testPipe = pipe(
-      (v: number) => ok(!(v % 2) ? v : undefined),
-      (v) => {
-        if (v === undefined) {
-          return err(null);
-        } else {
-          return ok(v);
-        }
-      },
+      (v: number) => (!(v % 2) ? ok(v) : err(errorTuple("TEST", v))),
       (v) => ok(`${v}`),
     );
 
-    expect(() => testPipe(1)).toThrow();
-    expect(() => testPipe(2)).not.toThrow();
+    const resultOk = testPipe(2);
+
+    expect(isOk(resultOk)).toBe(true);
+    expect(getOk(resultOk)).toBe("2");
+
+    const resultErr = testPipe(1);
+
+    expect(isErr(resultErr)).toBe(true);
+    expect(getErr(resultErr)).toEqual(errorTuple("TEST", 1));
   });
 });

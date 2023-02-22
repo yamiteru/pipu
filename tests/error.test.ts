@@ -1,14 +1,23 @@
-import { filter, error, errorTuple } from "../src";
+import { getErr, getOk, isErr, isOk } from "elfs";
+import { error, filter, errorTuple } from "../src";
 
-describe("wrap", () => {
-  it("should wrap pipeable with a custom error", () => {
-    try {
-      error(
-        filter((v: number) => v === 0),
-        (value) => errorTuple("TEST", value),
-      )(1);
-    } catch (e) {
-      expect(e).toEqual(["TEST", 1, {}]);
-    }
+describe("error", () => {
+  const isEven = error(
+    filter((v: number) => !(v % 2)),
+    (value) => errorTuple("TEST", value),
+  );
+
+  it("should return Ok when child returns Ok", () => {
+    const result = isEven(2);
+
+    expect(isOk(result)).toBe(true);
+    expect(getOk(result)).toBe(2);
+  });
+
+  it("should return custom Error when child returns Error", () => {
+    const result = isEven(1);
+
+    expect(isErr(result)).toBe(true);
+    expect(getErr(result)).toEqual(errorTuple("TEST", 1));
   });
 });

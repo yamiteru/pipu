@@ -1,12 +1,12 @@
 {
   "name": "pipem",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/*.js", "dist/*.map", "dist/*.ts"],
+  "files": ["dist/*.js", "dist/*.map", "dist/*.ts", "dist/pipeable/*.ts"],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
   "description": "Low-level, type-safe and throwable piping for TypeScript with a few core pipeables.",
   "repository": {

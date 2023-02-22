@@ -1,7 +1,7 @@
 import { Result, getErr, getOk, isOk } from "elfs";
-import { pipe, filter, map, wrap, error, or } from "../src";
+import { and, filter, map, wrap, error, or } from "../src";
 
-const customPipe = pipe(
+const customPipe = and(
   or(
     filter((v: number) => !(v % 2)),
     filter((v: number) => !(v % 3)),
@@ -10,8 +10,10 @@ const customPipe = pipe(
     map((v) => v * 2),
     error("TEST"),
   ),
-  pipe(map((v) => v * 2)),
-  map((v) => `${v}`),
+  and(
+    map((v) => v * 2),
+    map((v) => `${v}`),
+  ),
 );
 
 const log = <$Result extends Result>(result: $Result) => {

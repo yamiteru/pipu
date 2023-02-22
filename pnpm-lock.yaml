@@ -10,7 +10,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.53.0
   '@typescript-eslint/parser': 5.53.0
   auto-changelog: 2.4.0
-  elfs: 0.0.6
+  elfs: 0.0.7
   esbuild: 0.17.10
   esbuild-plugin-swc: 1.0.1
   eslint: 8.34.0
@@ -25,7 +25,7 @@ specifiers:
   typescript: next
 
 dependencies:
-  elfs: 0.0.6
+  elfs: 0.0.7
 
 devDependencies:
   '@release-it/keep-a-changelog': 3.1.0_release-it@15.6.0
@@ -2369,8 +2369,8 @@ packages:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
     dev: true
 
-  /elfs/0.0.6:
-    resolution: {integrity: sha512-poFRaYX5Z/aKZws7FiqscDmubc1lKjA6UbKC1LfssnR6XcAi+CqMyvMP38ZWBo8+88Ns6vOSPi8EDOIJE2cn4w==}
+  /elfs/0.0.7:
+    resolution: {integrity: sha512-jjQOwSfN2ZvQOJDas3ee6qXzMpYRK2og6fDfl28n0E8MGgn0eJRkECoa6uQV60vQauaGo+3Cn+kDLNr/ycPgFg==}
     dev: false
 
   /emittery/0.13.1:

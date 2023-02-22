@@ -39,7 +39,8 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "pnpm build",
     "release": "release-it",
-    "example:simple": "ts-node examples/simple.ts"
+    "example:simple": "ts-node examples/simple.ts",
+    "generate:types:pipe": "ts-node scripts/generatePipeTypes.ts"
   },
   "devDependencies": {
     "@release-it/keep-a-changelog": "3.1.0",

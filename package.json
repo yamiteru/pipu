@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "files": ["dist/*.js", "dist/*.map", "dist/*.ts", "dist/pipeable/*.ts"],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
-  "description": "Low-level, type-safe and throwable piping for TypeScript with a few core pipeables.",
+  "description": "Low-level and type-safe pipe utility with focus on size, performance and modularity.",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamiteru/pipem.git",

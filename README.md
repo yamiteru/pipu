@@ -1,6 +1,8 @@
-# Pipem
+```shell
+yarn add pipem // pnpm add pipem
+```
 
-Low-level and type-safe pipe utility with focus on size, performance and modularity.
+---
 
 ## Pipeables
 
@@ -37,12 +39,12 @@ map((v: number) => `${v}`);
 
 ### wrap
 
-It let's you modify `Err` of a sub-pipeable. When `Ok` is returned by the sub-pipeable it just passes it through without changing it.
+It let's you modify `Err` of a sub-pipeable. When `Ok` is returned by the sub-pipeable it just passes it through without changing it. When `Err` is returned it gets passed into the `error` function and produces a new `Err`.
 
 ```ts
 wrap(
   filter(...),
-  error("TEST", (_, error) => ({ error }))
+  error("TEST")
 );
 ```
 
@@ -72,6 +74,8 @@ or(
 
 Pipe is just `and`.
 
+---
+
 ## Errors
 
 Are you a soy boi who uses `try/catch` and later on cries alone in the corner because `try/catch` sucks? You no longer have to be!
@@ -83,3 +87,14 @@ In Pipem we use `Result<Ok, Err>` for all pipeables. We have an `Error` type and
 If your pipeable throws it means that you have an unhandled behavior that needs to be put in order with `err`! Named errors are better than un-named.
 
 If you intentionally throw your pp is gonna shrink.
+
+---
+
+## Limitations
+
+1. `or` cannot take `Pipeable`s with different input type
+2. `and`/`pipe` and `or` can take only up to 26 `Pipeable`s
+
+---
+
+Have a beautiful day 🍀.

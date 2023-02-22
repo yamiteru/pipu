@@ -1,5 +1,5 @@
-import { ObjectAny, Fn } from "elfs";
-import { Error } from "./types";
+import { ObjectAny, Fn, Result } from "elfs";
+import { Error, PipeableOutput } from "./types";
 
 /**
  * Returns function which dynamically creates error tuple based on value and potential sub-error.
@@ -20,4 +20,21 @@ export function error<
         : {},
     ] as Error<$Reason, $Input, $Context>;
   };
+}
+
+/**
+ * Parses `Pipeable` with `unknown` input.
+ *
+ * @example
+ * const isStringOrNumber = pipe(...);
+ * // ResultErr<["OR", [], { }]>
+ * const result1 = parse(isStringOrNumber, []);
+ * // ResultOk<1>
+ * const result2 = parse(isStringOrNumber, 1);
+ * */
+export function parse<$Result extends Result>(
+  pipeable: PipeableOutput<$Result>,
+  data: unknown,
+) {
+  return pipeable(data);
 }

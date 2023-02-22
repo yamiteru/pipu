@@ -1,5 +1,5 @@
 ```shell
-yarn add pipem // pnpm add pipem
+yarn add pipem
 ```
 
 ---
@@ -76,17 +76,25 @@ Pipe is just `and`.
 
 ---
 
-## Errors
+## Utils
 
-Are you a soy boi who uses `try/catch` and later on cries alone in the corner because `try/catch` sucks? You no longer have to be!
+### error
 
-In Pipem we use `Result<Ok, Err>` for all pipeables. We have an `Error` type and a handful of utils to help you work with `Result` like `isOk`/`isErr`/`getOk`/`getErr`/`match`/etc.
+Returns function which dynamically creates error tuple based on value and potential sub-error.
 
-(You can find more information about this in (Elfs)[https://github.com/yamiteru/elfs])
+It should mainly be used in `wrap` function as a second parameter.
 
-If your pipeable throws it means that you have an unhandled behavior that needs to be put in order with `err`! Named errors are better than un-named.
+### parse
 
-If you intentionally throw your pp is gonna shrink.
+Parses `Pipeable` with `unknown` input.
+
+```ts
+const isStringOrNumber = pipe(...);
+// ResultErr<["OR", [], { }]>
+const result1 = parse(isStringOrNumber, []);
+// ResultOk<1>
+const result2 = parse(isStringOrNumber, 1);
+```
 
 ---
 

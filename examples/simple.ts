@@ -1,5 +1,5 @@
 import { Result, getErr, getOk, isOk } from "elfs";
-import { and, filter, map, wrap, error, or } from "../src";
+import { and, filter, map, wrap, error, or, parse } from "../src";
 
 const customPipe = and(
   or(
@@ -21,7 +21,7 @@ const log = <$Result extends Result>(result: $Result) => {
 };
 
 // error
-log(customPipe(1));
+log(parse(customPipe, 1));
 
-// '48'
-log(customPipe(12));
+// "48"
+log(parse(customPipe, 12));

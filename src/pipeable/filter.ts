@@ -1,6 +1,6 @@
 import { Either, Predicate, Result, ResultErr, ResultOk, err, ok } from "elfs";
 import { Error, Pipeable } from "../types";
-import { errorTuple } from "../utils";
+import { error } from "../utils";
 
 export function filter<$Input>(
   predicate: Predicate<$Input>,
@@ -38,12 +38,6 @@ export function filter<
       )(value);
     }
 
-    return (
-      falsePipeable ||
-      (((value) => err(errorTuple("FILTER", value))) as Pipeable<
-        $Input,
-        $FalseResult
-      >)
-    )(value);
+    return (falsePipeable || ((value) => err(error("FILTER")(value))))(value);
   };
 }

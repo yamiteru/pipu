@@ -1,10 +1,10 @@
 import { getErr, getOk, isErr, isOk } from "elfs";
-import { error, filter, errorTuple } from "../src";
+import { wrap, filter, error } from "../src";
 
-describe("error", () => {
-  const isEven = error(
+describe("wrap", () => {
+  const isEven = wrap(
     filter((v: number) => !(v % 2)),
-    (value) => errorTuple("TEST", value),
+    error("TEST"),
   );
 
   it("should return Ok when child returns Ok", () => {
@@ -18,6 +18,6 @@ describe("error", () => {
     const result = isEven(1);
 
     expect(isErr(result)).toBe(true);
-    expect(getErr(result)).toEqual(errorTuple("TEST", 1));
+    expect(getErr(result)).toEqual(error("TEST")(1));
   });
 });

@@ -1,5 +1,5 @@
 import { err, getErr, getOk, isErr, isOk, ok } from "elfs";
-import { errorTuple, pipe } from "../src";
+import { error, pipe } from "../src";
 
 describe("Pipe", () => {
   it("should create callable pipe", () => {
@@ -23,7 +23,7 @@ describe("Pipe", () => {
 
   it("should stop execution and return Error", () => {
     const testPipe = pipe(
-      (v: number) => (!(v % 2) ? ok(v) : err(errorTuple("TEST", v))),
+      (v: number) => (!(v % 2) ? ok(v) : err(error("TEST")(v))),
       (v) => ok(`${v}`),
     );
 
@@ -35,6 +35,6 @@ describe("Pipe", () => {
     const resultErr = testPipe(1);
 
     expect(isErr(resultErr)).toBe(true);
-    expect(getErr(resultErr)).toEqual(errorTuple("TEST", 1));
+    expect(getErr(resultErr)).toEqual(error("TEST")(1));
   });
 });

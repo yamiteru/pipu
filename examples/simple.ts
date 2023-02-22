@@ -1,14 +1,14 @@
 import { Result, getErr, getOk, isOk } from "elfs";
-import { pipe, filter, map, error, errorTuple, or } from "../src";
+import { pipe, filter, map, wrap, error, or } from "../src";
 
 const customPipe = pipe(
   or(
     filter((v: number) => !(v % 2)),
     filter((v: number) => !(v % 3)),
   ),
-  error(
+  wrap(
     map((v) => v * 2),
-    (value) => errorTuple("TEST", value),
+    error("TEST"),
   ),
   pipe(map((v) => v * 2)),
   map((v) => `${v}`),

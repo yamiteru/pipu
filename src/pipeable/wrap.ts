@@ -1,7 +1,7 @@
 import { Either, Result, ResultErr, ResultOk, err, getErr, isErr } from "elfs";
 import { Error, Pipeable } from "../types";
 
-export function error<
+export function wrap<
   $Input,
   $Output,
   $InputError extends Error,

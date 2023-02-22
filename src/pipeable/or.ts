@@ -1,6 +1,6 @@
 import { Result, err, isOk } from "elfs";
 import { Error, Pipeable } from "../types";
-import { errorTuple } from "../utils";
+import { error } from "../utils";
 
 export function or<A1, B1, B2 extends Error>(
   ab: Pipeable<A1, Result<B1, B2>>,
@@ -1489,6 +1489,6 @@ export function or(...pipeables: Pipeable[]) {
       }
     }
 
-    return err(errorTuple("OR", value));
+    return err(error("OR")(value));
   };
 }

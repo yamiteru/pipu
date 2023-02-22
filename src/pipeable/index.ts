@@ -1,5 +1,5 @@
 export * from "./pipe";
-export * from "./error";
+export * from "./wrap";
 export * from "./filter";
 export * from "./map";
 export * from "./or";

@@ -33,14 +33,14 @@ filter(
 map((v: number) => `${v}`);
 ```
 
-### error
+### wrap
 
 It let's you modify error of a sub-pipeable.
 
 ```ts
-error(
+wrap(
   filter(...),
-  (value, error) => errorTuple("TEST", value, { error })
+  error("TEST", (_, error) => ({ error }))
 );
 ```
 

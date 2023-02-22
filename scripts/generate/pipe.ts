@@ -7,23 +7,29 @@ import { ALPHABET, LETTERS, saveGenerated } from "./shared";
     const generics: string[] = [];
     const input: string[] = [];
     const resultErr: string[] = [];
+    let output = "";
 
     for (let j = 1; j < i; ++j) {
       const previous = ALPHABET[j - 1];
       const current = ALPHABET[j];
 
-      generics.push(`${current}1, ${current}2 extends Error`);
+      generics.push(`$Output_${current}, $Error_${current} extends Error`);
 
       input.push(
-        `${previous.toLocaleLowerCase()}${current.toLocaleLowerCase()}: Pipeable<${previous}1, Result<${current}1, ${current}2>>`,
+        `pipeable_${previous.toLocaleLowerCase()}_${current.toLocaleLowerCase()}: Pipeable<${
+          j === 1 ? "$Input" : `$Output_${previous}`
+        }, Result<$Output_${current}, $Error_${current}>>`,
       );
 
-      resultErr.push(`${current}2`);
+      resultErr.push(`$Error_${current}`);
+      output = `$Output_${current}`;
     }
 
-    type += `export function pipe<A1, ${generics.join(",")}>(${input.join(
+    type += `export function pipe<$Input, ${generics.join(",")}>(${input.join(
       ",",
-    )}): Pipeable<A1, Result<A1, ${resultErr.join("|")}>>;`;
+    )}): Pipeable<$Input, Result<${output}, Either<[${resultErr.join(
+      ",",
+    )}]>>>;`;
   }
 
   await saveGenerated("pipe", type);

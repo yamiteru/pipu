@@ -3,29 +3,34 @@ import { ALPHABET, LETTERS, saveGenerated } from "./shared";
 (async () => {
   let type = "";
 
-  for (let i = 2; i < LETTERS; ++i) {
+  for (let i = 1; i < LETTERS; ++i) {
     const generics: string[] = [];
     const input: string[] = [];
     const resultOk: string[] = [];
+    const pipeableInput: string[] = [];
 
-    for (let j = 1; j < i; ++j) {
-      const previous = ALPHABET[j - 1];
+    for (let j = 0; j < i; ++j) {
       const current = ALPHABET[j];
 
-      generics.push(`${current}1, ${current}2 extends Error`);
-
-      input.push(
-        `${previous.toLocaleLowerCase()}${current.toLocaleLowerCase()}: Pipeable<A1, Result<${current}1, ${current}2>>`,
+      generics.push(
+        `$Input_${current}, $Output_${current}, $Error_${current} extends Error`,
       );
 
-      resultOk.push(`${current}1`);
+      input.push(
+        `pipeable_${current.toLocaleLowerCase()}: Pipeable<$Input_${current}, Result<$Output_${current}, $Error_${current}>>`,
+      );
+
+      resultOk.push(`$Output_${current}`);
+      pipeableInput.push(`$Input_${current}`);
     }
 
-    const resultOkString = resultOk.join("|");
-
-    type += `export function or<A1, ${generics.join(",")}>(${input.join(
+    type += `export function or<${generics.join(",")}>(${input.join(
       ",",
-    )}): Pipeable<A1, Result<${resultOkString}, Error<"OR", ${resultOkString}>>>;`;
+    )}): Pipeable<Either<[${pipeableInput.join(
+      ",",
+    )}]>, Result<Either<[${resultOk.join(
+      ",",
+    )}]>, Error<"OR", Either<[${pipeableInput.join(",")}]>>>>;`;
   }
 
   await saveGenerated("or", type);

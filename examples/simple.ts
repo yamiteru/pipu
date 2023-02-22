@@ -4,14 +4,14 @@ import { and, filter, map, wrap, error, or } from "../src";
 const customPipe = and(
   or(
     filter((v: number) => !(v % 2)),
-    filter((v: number) => !(v % 3)),
+    filter((v: string) => !(+v % 2)),
   ),
   wrap(
-    map((v) => v * 2),
+    map((v) => +v * 2),
     error("TEST"),
   ),
   and(
-    map((v) => v * 2),
+    map((v: number) => v * 2),
     map((v) => `${v}`),
   ),
 );

@@ -2,7 +2,7 @@ import { Result, ok } from "elfs";
 import { Error, Pipeable } from "../types";
 
 /**
- * Pipeable which maps value from `$Input` to `$Output`.
+ * Pipeable which maps value from `$Input` to `Ok<$Output>`.
  *
  * @example
  * // Pipeable<number, Result<string, Error>>

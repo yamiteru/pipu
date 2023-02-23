@@ -2455,9 +2455,7 @@ export function pipe<
   >
 >;
 /**
- * Pipeable which takes N number of pipeables and return either `Ok` returned by the last pipeable or `Err` returned by any of the pipeables.
- *
- * Pipe is aliased to `and` because it naturally acts as &.
+ * Pipeable which takes N number of pipeables and returns either `Ok` returned by the last pipeable or `Err` returned by any of the pipeables.
  *
  * @example
  * // Pipeable<number, Result<string, Error<"FILTER", number> | Error<"CUSTOM", number>>>
@@ -2466,7 +2464,7 @@ export function pipe<
  *   wrap(
  *     map((v) => `${v}`),
  *     error("CUSTOM")
- *   )
+ *   ),
  * );
  * */
 export function pipe(...pipeables: Pipeable[]) {
@@ -2489,4 +2487,7 @@ export function pipe(...pipeables: Pipeable[]) {
   };
 }
 
+/**
+ * Alias for `pipe`.
+ * */
 export const and = pipe;

@@ -25,6 +25,20 @@ export function filter<
  * Pipeable which runs either `truePipeable` or `falsePipeable` based on return value of `predicate`.
  *
  * By default `truePipeable` returns `Ok<$Input>` and `falsePipeable` returns `Err<Error<"FILTER", $Input>>`.
+ *
+ * @example
+ * filter((v: number) => !(v % 2));
+ *
+ * filter(
+ *   (v: number) => !(v % 2),
+ *   () => ok("even"),
+ * );
+ *
+ * filter(
+ *   (v: number) => !(v % 2),
+ *   () => ok("even"),
+ *   () => ok("odd"),
+ * );
  * */
 export function filter<
   $Input,

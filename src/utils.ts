@@ -2,8 +2,12 @@ import { ObjectAny, Fn, Result } from "elfs";
 import { Error, PipeableOutput } from "./types";
 
 /**
- * Returns function which dynamically creates error tuple based on value and potential sub-error.
+ * Creates error tuple based on value and potential sub-error.
  * It should mainly be used in `wrap` function as a second parameter.
+ * All `Pipeable`s should return error created with this function.
+ *
+ * @example
+ * error("TEST", (value, error) => ({ valueType: typeof value, error }))
  * */
 export function error<
   $Reason extends string,
@@ -23,7 +27,7 @@ export function error<
 }
 
 /**
- * Parses `Pipeable` with `unknown` input.
+ * Allows to run `Pipeable` with `unknown` input while infering everything else from the `Pipeable` as usual.
  *
  * @example
  * const isStringOrNumber = pipe(...);

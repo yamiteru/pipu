@@ -10,8 +10,7 @@ export type Error<
 > = [reason: $Reason, value: $Value, context?: $Context];
 
 /**
- * A function which can be put inside a `pipe`.
- * It should return a `Result`.
+ * A general function which can be put inside a `pipe`.
  * */
 export type Pipeable<$Input = any, $Output extends Result = Result> = (
   data: $Input,
@@ -27,13 +26,22 @@ export type PipeableInput<$Input> = Pipeable<$Input>;
  * */
 export type PipeableOutput<$Output extends Result> = Pipeable<any, $Output>;
 
+/**
+ * Infer input of `Pipeable`.
+ * */
 export type InferPipeableInput<$Pipeable extends Pipeable> =
   $Pipeable extends Pipeable<infer $Input, any> ? $Input : never;
 
+/**
+ * Infer inputs of array of `Pipeable`s.
+ * */
 export type InferPipeableArrayInput<$Pipeables extends Pipeable[]> = {
   [$Key in keyof $Pipeables]: InferPipeableInput<$Pipeables[$Key]>;
 }[number];
 
+/**
+ * Infer `Error` of `Pipeable`.
+ * */
 export type InferPipeableError<$Pipeable extends Pipeable> =
   $Pipeable extends Pipeable<any, infer $Result>
     ? $Result extends ResultErr<infer $Err>
@@ -41,10 +49,16 @@ export type InferPipeableError<$Pipeable extends Pipeable> =
       : never
     : never;
 
+/**
+ * Infer `Error`s of array of `Pipeable`s.
+ * */
 export type InferPipeableArrayError<$Pipeables extends Pipeable[]> = {
   [$Key in keyof $Pipeables]: InferPipeableError<$Pipeables[$Key]>;
 }[number];
 
+/**
+ * Infer `Ok` of `Pipeable`.
+ * */
 export type InferPipeableOk<$Pipeable extends Pipeable> =
   $Pipeable extends Pipeable<any, infer $Result>
     ? $Result extends ResultOk<infer $Ok>
@@ -52,6 +66,9 @@ export type InferPipeableOk<$Pipeable extends Pipeable> =
       : never
     : never;
 
+/**
+ * Infer `Ok`s of array of `Pipeable`s.
+ * */
 export type InferPipeableArrayOk<$Pipeables extends Pipeable[]> = {
   [$Key in keyof $Pipeables]: InferPipeableOk<$Pipeables[$Key]>;
 }[number];

@@ -1,6 +1,6 @@
 {
   "name": "pipem",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "files": ["dist/*.js", "dist/*.map", "dist/*.ts", "dist/pipeable/*.ts"],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
-  "description": "Low-level and type-safe pipe utility with focus on size, performance and modularity.",
+  "description": "Powerful TypeScript pipes with focus on size, performance and modularity.",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamiteru/pipem.git",

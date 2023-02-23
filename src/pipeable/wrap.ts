@@ -10,8 +10,8 @@ import { Error, Pipeable } from "../types";
  * // Pipeable<number, Result<number, Error<"CUSTOM", number>>>
  * wrap(
  *   map((v: number) => v * 2),
- *   error("CUSTOM")
- * )
+ *   error("CUSTOM"),
+ * );
  * */
 export function wrap<
   $Input,

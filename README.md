@@ -3,7 +3,7 @@
 ---
 
 ```shell
-yarn add pipem
+yarn add pipu
 ```
 
 ---

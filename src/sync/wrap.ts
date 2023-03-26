@@ -32,3 +32,5 @@ export function wrap<
     return result as ResultOk<$Output>;
   };
 }
+
+export const wrapeSync = wrap;

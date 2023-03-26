@@ -1,5 +1,5 @@
 import { Result } from "elfs";
-import { PipeableAsyncOutput } from "../types";
+import { PipeableOutput } from "../types";
 
 /**
  * Allows to run `PipeableAsync` with `unknown` input while infering everything else from the `PipeableAsync` as usual.
@@ -11,9 +11,11 @@ import { PipeableAsyncOutput } from "../types";
  * // ResultOk<1>
  * const result2 = await parse(isStringOrNumber, 1);
  **/
-export function parse<$Result extends Result>(
-  pipeable: PipeableAsyncOutput<$Result>,
+export async function parse<$Result extends Result>(
+  pipeable: PipeableOutput<$Result>,
   data: unknown,
 ) {
-  return pipeable(data);
+  return await pipeable(data);
 }
+
+export const parseAsync = parse;

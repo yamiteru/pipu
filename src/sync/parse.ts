@@ -17,3 +17,5 @@ export function parse<$Result extends Result>(
 ) {
   return pipeable(data);
 }
+
+export const parseSync = parse;

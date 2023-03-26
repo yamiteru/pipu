@@ -1,5 +1,5 @@
 import { Either, getOk, isErr, ok, Result } from "elfs";
-import { Pipeable, PipeableAsync } from "../types";
+import { Error, Pipeable, PipeableAsync } from "../types";
 
 export function and<$Input, $Output_1, $Error_1 extends Error>(
   pipeable_0_1: Pipeable<$Input, Result<$Output_1, $Error_1>>,
@@ -2489,3 +2489,5 @@ export function and(...pipeables: Pipeable[]) {
     return ok(latest);
   };
 }
+
+export const andAsync = and;

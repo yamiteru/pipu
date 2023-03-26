@@ -4492,3 +4492,5 @@ export function or(...pipeables: Pipeable[]) {
     return err(error("OR")(value));
   };
 }
+
+export const orAsync = or;

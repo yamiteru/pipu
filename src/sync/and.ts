@@ -2489,3 +2489,5 @@ export function and(...pipeables: PipeableSync[]) {
     return ok(latest);
   };
 }
+
+export const andSync = and;

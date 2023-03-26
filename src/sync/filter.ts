@@ -52,7 +52,7 @@ export function filter<
   truePipeable?: PipeableSync<$Input, $TrueResult>,
   falsePipeable?: PipeableSync<$Input, $FalseResult>,
 ) {
-  return (value: $Input) => {
+   return (value: $Input) => {
     if (predicate(value)) {
       return truePipeable ? truePipeable(value) : ok(value);
     }
@@ -60,3 +60,5 @@ export function filter<
     return falsePipeable ? falsePipeable(value) : err(error("FILTER")(value));
   };
 }
+
+export const filterSync = filter;

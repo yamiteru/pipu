@@ -25,3 +25,5 @@ export function resolve<$Input, $Result>(
     }
   };
 }
+
+export const resolveAsync = resolve;

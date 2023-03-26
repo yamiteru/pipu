@@ -1,8 +1,8 @@
 import { getErr, getOk, isErr, isOk } from "elfs";
-import { error } from "../src";
-import { wrap, filter } from "../src/sync";
+import { error } from "../../src";
+import { wrap, filter } from "../../src/sync";
 
-describe("wrap", () => {
+describe("sync/wrap", () => {
   const isEven = wrap(
     filter((v: number) => !(v % 2)),
     error("TEST"),

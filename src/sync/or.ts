@@ -4492,3 +4492,5 @@ export function or(...pipeables: PipeableSync[]) {
     return err(error("OR")(value));
   };
 }
+
+export const orSync = or;

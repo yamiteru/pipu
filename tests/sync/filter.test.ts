@@ -1,7 +1,7 @@
 import { getOk, isErr, isOk, ok } from "elfs";
-import { filter } from "../src/sync";
+import { filter } from "../../src/sync";
 
-describe("filter", () => {
+describe("sync/filter", () => {
   const isEvenDefault = filter((v: number) => !(v % 2));
   const isEvenCustom = filter(
     (v: number) => !(v % 2),

@@ -1,14 +1,25 @@
-# Pipu
-
-Powerful TypeScript a/sync pipes with focus on size, performance and modularity.
-
-## Installation
-
----
-
 ```bash
 yarn add pipu # npm install pipu
 ```
+
+---
+
+## Concept
+
+Pipu is designed to be as low-level and unopinionated as possible so you can build your own abstractions on top of it.
+
+It supports both sync and async modes. That means you can use sync to solve problems where sync fits the job best and async where async fits the job best.
+
+---
+
+## Examples
+
+1. [Map](./examples/1-map.ts)
+2. [Filter](./examples/2-filter.ts)
+3. [Or](./examples/3-or.ts)
+4. [Wrap](./examples/4-wrap.ts)
+5. [Parse](./examples/5-parse.ts)
+6. [Resolve](./examples/6-resolve.ts)
 
 ---
 
@@ -16,7 +27,9 @@ yarn add pipu # npm install pipu
 
 Pipeables are functions that you can put into a pipe (pipe itself is `Pipeable`).
 
-We try to make the number of core pipeables as low as possible so it's easy to build your own abstractions on top them.
+There's just a few core pipeables so it's easy to build your own abstractions on top them.
+
+*(but I'm open to ideas and PRs regarding new pipeables)*
 
 ### filter
 

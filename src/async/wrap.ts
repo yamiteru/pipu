@@ -1,5 +1,5 @@
 import { Either, Result, ResultErr, ResultOk, err, getErr, isErr } from "elfs";
-import { Error, PipeableAsync } from "../types";
+import { Error, Pipeable, PipeableAsync } from "../types";
 
 /**
  * Async pipeable which wraps async pipeable and overrides its `Error`.
@@ -19,7 +19,7 @@ export function wrap<
   $InputError extends Error,
   $OutputError extends Error,
 >(
-  pipeable: PipeableAsync<$Input, Result<$Output, $InputError>>,
+  pipeable: Pipeable<$Input, Result<$Output, $InputError>>,
   error: (value: $Input, error: $InputError) => $OutputError,
 ): PipeableAsync<$Input, Either<[ResultOk<$Output>, ResultErr<$OutputError>]>> {
   return async (value) => {
@@ -32,3 +32,5 @@ export function wrap<
     return result as ResultOk<$Output>;
   };
 }
+
+export const wrapAsync = wrap;

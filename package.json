@@ -7,24 +7,24 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
+      "import": "./dist/index.mjs.js",
       "require": "./dist/index.cjs.js"
     },
     "./sync": {
       "types": "./dist/sync.d.ts",
-      "import": "./dist/sync.esm.js",
+      "import": "./dist/sync.mjs.js",
       "require": "./dist/sync.cjs.js"
     },
     "./async": {
       "types": "./dist/async.d.ts",
-      "import": "./dist/async.esm.js",
+      "import": "./dist/async.mjs.js",
       "require": "./dist/async.cjs.js"
     }
   },
   "files": [
-    "dist/*.js",
-    "dist/*.map",
-    "dist/*.ts"
+    "dist/**.js",
+    "dist/**.map",
+    "dist/**.ts"
   ],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
   "description": "🔥 Hellishly fast and 🤏 tiny async/sync pipe operator for TypeScript",

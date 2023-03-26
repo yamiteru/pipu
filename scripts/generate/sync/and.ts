@@ -1,6 +1,6 @@
-import { ALPHABET, LETTERS, saveGenerated } from "./shared";
+import { ALPHABET, LETTERS, saveGenerated } from "../shared";
 
-(async () => {
+export default async () => {
   let type = "";
 
   for (let i = 2; i < LETTERS; ++i) {
@@ -16,7 +16,7 @@ import { ALPHABET, LETTERS, saveGenerated } from "./shared";
       generics.push(`$Output_${current}, $Error_${current} extends Error`);
 
       input.push(
-        `pipeable_${previous.toLocaleLowerCase()}_${current.toLocaleLowerCase()}: Pipeable<${
+        `pipeable_${previous.toLocaleLowerCase()}_${current.toLocaleLowerCase()}: PipeableSync<${
           j === 1 ? "$Input" : `$Output_${previous}`
         }, Result<$Output_${current}, $Error_${current}>>`,
       );
@@ -25,12 +25,12 @@ import { ALPHABET, LETTERS, saveGenerated } from "./shared";
       output = `$Output_${current}`;
     }
 
-    type += `export function pipe<$Input, ${generics.join(",")}>(${input.join(
+    type += `export function and<$Input, ${generics.join(",")}>(${input.join(
       ",",
-    )}): Pipeable<$Input, Result<${output}, Either<[${resultErr.join(
+    )}): PipeableSync<$Input, Result<${output}, Either<[${resultErr.join(
       ",",
     )}]>>>;`;
   }
 
-  await saveGenerated("pipe", type);
-})();
+  await saveGenerated("sync_and", type);
+};

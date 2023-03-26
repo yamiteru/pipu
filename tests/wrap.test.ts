@@ -1,5 +1,6 @@
 import { getErr, getOk, isErr, isOk } from "elfs";
-import { wrap, filter, error } from "../src";
+import { error } from "../src";
+import { wrap, filter } from "../src/sync";
 
 describe("wrap", () => {
   const isEven = wrap(

@@ -1,5 +1,5 @@
 import { getOk, isErr, isOk } from "elfs";
-import { or, filter } from "../src";
+import { or, filter } from "../src/sync";
 
 describe("or", () => {
   const isDividableByTwoOrThree = or(

@@ -1,10 +1,10 @@
-import { Either, Result, getOk, isErr, ok } from "elfs";
-import { Error, Pipeable } from "../types";
+import { Either, getOk, isErr, ok, Result } from "elfs";
+import { Pipeable, PipeableAsync } from "../types";
 
-export function pipe<$Input, $Output_1, $Error_1 extends Error>(
+export function and<$Input, $Output_1, $Error_1 extends Error>(
   pipeable_0_1: Pipeable<$Input, Result<$Output_1, $Error_1>>,
-): Pipeable<$Input, Result<$Output_1, Either<[$Error_1]>>>;
-export function pipe<
+): PipeableAsync<$Input, Result<$Output_1, Either<[$Error_1]>>>;
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -13,8 +13,8 @@ export function pipe<
 >(
   pipeable_0_1: Pipeable<$Input, Result<$Output_1, $Error_1>>,
   pipeable_1_2: Pipeable<$Output_1, Result<$Output_2, $Error_2>>,
-): Pipeable<$Input, Result<$Output_2, Either<[$Error_1, $Error_2]>>>;
-export function pipe<
+): PipeableAsync<$Input, Result<$Output_2, Either<[$Error_1, $Error_2]>>>;
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -26,8 +26,11 @@ export function pipe<
   pipeable_0_1: Pipeable<$Input, Result<$Output_1, $Error_1>>,
   pipeable_1_2: Pipeable<$Output_1, Result<$Output_2, $Error_2>>,
   pipeable_2_3: Pipeable<$Output_2, Result<$Output_3, $Error_3>>,
-): Pipeable<$Input, Result<$Output_3, Either<[$Error_1, $Error_2, $Error_3]>>>;
-export function pipe<
+): PipeableAsync<
+  $Input,
+  Result<$Output_3, Either<[$Error_1, $Error_2, $Error_3]>>
+>;
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -42,11 +45,11 @@ export function pipe<
   pipeable_1_2: Pipeable<$Output_1, Result<$Output_2, $Error_2>>,
   pipeable_2_3: Pipeable<$Output_2, Result<$Output_3, $Error_3>>,
   pipeable_3_4: Pipeable<$Output_3, Result<$Output_4, $Error_4>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<$Output_4, Either<[$Error_1, $Error_2, $Error_3, $Error_4]>>
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -64,11 +67,11 @@ export function pipe<
   pipeable_2_3: Pipeable<$Output_2, Result<$Output_3, $Error_3>>,
   pipeable_3_4: Pipeable<$Output_3, Result<$Output_4, $Error_4>>,
   pipeable_4_5: Pipeable<$Output_4, Result<$Output_5, $Error_5>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<$Output_5, Either<[$Error_1, $Error_2, $Error_3, $Error_4, $Error_5]>>
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -89,14 +92,14 @@ export function pipe<
   pipeable_3_4: Pipeable<$Output_3, Result<$Output_4, $Error_4>>,
   pipeable_4_5: Pipeable<$Output_4, Result<$Output_5, $Error_5>>,
   pipeable_5_6: Pipeable<$Output_5, Result<$Output_6, $Error_6>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_6,
     Either<[$Error_1, $Error_2, $Error_3, $Error_4, $Error_5, $Error_6]>
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -120,7 +123,7 @@ export function pipe<
   pipeable_4_5: Pipeable<$Output_4, Result<$Output_5, $Error_5>>,
   pipeable_5_6: Pipeable<$Output_5, Result<$Output_6, $Error_6>>,
   pipeable_6_7: Pipeable<$Output_6, Result<$Output_7, $Error_7>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_7,
@@ -129,7 +132,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -156,7 +159,7 @@ export function pipe<
   pipeable_5_6: Pipeable<$Output_5, Result<$Output_6, $Error_6>>,
   pipeable_6_7: Pipeable<$Output_6, Result<$Output_7, $Error_7>>,
   pipeable_7_8: Pipeable<$Output_7, Result<$Output_8, $Error_8>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_8,
@@ -174,7 +177,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -204,7 +207,7 @@ export function pipe<
   pipeable_6_7: Pipeable<$Output_6, Result<$Output_7, $Error_7>>,
   pipeable_7_8: Pipeable<$Output_7, Result<$Output_8, $Error_8>>,
   pipeable_8_9: Pipeable<$Output_8, Result<$Output_9, $Error_9>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_9,
@@ -223,7 +226,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -256,7 +259,7 @@ export function pipe<
   pipeable_7_8: Pipeable<$Output_7, Result<$Output_8, $Error_8>>,
   pipeable_8_9: Pipeable<$Output_8, Result<$Output_9, $Error_9>>,
   pipeable_9_10: Pipeable<$Output_9, Result<$Output_10, $Error_10>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_10,
@@ -276,7 +279,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -312,7 +315,7 @@ export function pipe<
   pipeable_8_9: Pipeable<$Output_8, Result<$Output_9, $Error_9>>,
   pipeable_9_10: Pipeable<$Output_9, Result<$Output_10, $Error_10>>,
   pipeable_10_11: Pipeable<$Output_10, Result<$Output_11, $Error_11>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_11,
@@ -333,7 +336,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -372,7 +375,7 @@ export function pipe<
   pipeable_9_10: Pipeable<$Output_9, Result<$Output_10, $Error_10>>,
   pipeable_10_11: Pipeable<$Output_10, Result<$Output_11, $Error_11>>,
   pipeable_11_12: Pipeable<$Output_11, Result<$Output_12, $Error_12>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_12,
@@ -394,7 +397,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -436,7 +439,7 @@ export function pipe<
   pipeable_10_11: Pipeable<$Output_10, Result<$Output_11, $Error_11>>,
   pipeable_11_12: Pipeable<$Output_11, Result<$Output_12, $Error_12>>,
   pipeable_12_13: Pipeable<$Output_12, Result<$Output_13, $Error_13>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_13,
@@ -459,7 +462,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -504,7 +507,7 @@ export function pipe<
   pipeable_11_12: Pipeable<$Output_11, Result<$Output_12, $Error_12>>,
   pipeable_12_13: Pipeable<$Output_12, Result<$Output_13, $Error_13>>,
   pipeable_13_14: Pipeable<$Output_13, Result<$Output_14, $Error_14>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_14,
@@ -528,7 +531,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -576,7 +579,7 @@ export function pipe<
   pipeable_12_13: Pipeable<$Output_12, Result<$Output_13, $Error_13>>,
   pipeable_13_14: Pipeable<$Output_13, Result<$Output_14, $Error_14>>,
   pipeable_14_15: Pipeable<$Output_14, Result<$Output_15, $Error_15>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_15,
@@ -601,7 +604,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -652,7 +655,7 @@ export function pipe<
   pipeable_13_14: Pipeable<$Output_13, Result<$Output_14, $Error_14>>,
   pipeable_14_15: Pipeable<$Output_14, Result<$Output_15, $Error_15>>,
   pipeable_15_16: Pipeable<$Output_15, Result<$Output_16, $Error_16>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_16,
@@ -678,7 +681,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -732,7 +735,7 @@ export function pipe<
   pipeable_14_15: Pipeable<$Output_14, Result<$Output_15, $Error_15>>,
   pipeable_15_16: Pipeable<$Output_15, Result<$Output_16, $Error_16>>,
   pipeable_16_17: Pipeable<$Output_16, Result<$Output_17, $Error_17>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_17,
@@ -759,7 +762,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -816,7 +819,7 @@ export function pipe<
   pipeable_15_16: Pipeable<$Output_15, Result<$Output_16, $Error_16>>,
   pipeable_16_17: Pipeable<$Output_16, Result<$Output_17, $Error_17>>,
   pipeable_17_18: Pipeable<$Output_17, Result<$Output_18, $Error_18>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_18,
@@ -844,7 +847,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -904,7 +907,7 @@ export function pipe<
   pipeable_16_17: Pipeable<$Output_16, Result<$Output_17, $Error_17>>,
   pipeable_17_18: Pipeable<$Output_17, Result<$Output_18, $Error_18>>,
   pipeable_18_19: Pipeable<$Output_18, Result<$Output_19, $Error_19>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_19,
@@ -933,7 +936,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -996,7 +999,7 @@ export function pipe<
   pipeable_17_18: Pipeable<$Output_17, Result<$Output_18, $Error_18>>,
   pipeable_18_19: Pipeable<$Output_18, Result<$Output_19, $Error_19>>,
   pipeable_19_20: Pipeable<$Output_19, Result<$Output_20, $Error_20>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_20,
@@ -1026,7 +1029,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1092,7 +1095,7 @@ export function pipe<
   pipeable_18_19: Pipeable<$Output_18, Result<$Output_19, $Error_19>>,
   pipeable_19_20: Pipeable<$Output_19, Result<$Output_20, $Error_20>>,
   pipeable_20_21: Pipeable<$Output_20, Result<$Output_21, $Error_21>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_21,
@@ -1123,7 +1126,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1192,7 +1195,7 @@ export function pipe<
   pipeable_19_20: Pipeable<$Output_19, Result<$Output_20, $Error_20>>,
   pipeable_20_21: Pipeable<$Output_20, Result<$Output_21, $Error_21>>,
   pipeable_21_22: Pipeable<$Output_21, Result<$Output_22, $Error_22>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_22,
@@ -1224,7 +1227,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1296,7 +1299,7 @@ export function pipe<
   pipeable_20_21: Pipeable<$Output_20, Result<$Output_21, $Error_21>>,
   pipeable_21_22: Pipeable<$Output_21, Result<$Output_22, $Error_22>>,
   pipeable_22_23: Pipeable<$Output_22, Result<$Output_23, $Error_23>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_23,
@@ -1329,7 +1332,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1404,7 +1407,7 @@ export function pipe<
   pipeable_21_22: Pipeable<$Output_21, Result<$Output_22, $Error_22>>,
   pipeable_22_23: Pipeable<$Output_22, Result<$Output_23, $Error_23>>,
   pipeable_23_24: Pipeable<$Output_23, Result<$Output_24, $Error_24>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_24,
@@ -1438,7 +1441,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1516,7 +1519,7 @@ export function pipe<
   pipeable_22_23: Pipeable<$Output_22, Result<$Output_23, $Error_23>>,
   pipeable_23_24: Pipeable<$Output_23, Result<$Output_24, $Error_24>>,
   pipeable_24_25: Pipeable<$Output_24, Result<$Output_25, $Error_25>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_25,
@@ -1551,7 +1554,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1632,7 +1635,7 @@ export function pipe<
   pipeable_23_24: Pipeable<$Output_23, Result<$Output_24, $Error_24>>,
   pipeable_24_25: Pipeable<$Output_24, Result<$Output_25, $Error_25>>,
   pipeable_25_26: Pipeable<$Output_25, Result<$Output_26, $Error_26>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_26,
@@ -1668,7 +1671,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1752,7 +1755,7 @@ export function pipe<
   pipeable_24_25: Pipeable<$Output_24, Result<$Output_25, $Error_25>>,
   pipeable_25_26: Pipeable<$Output_25, Result<$Output_26, $Error_26>>,
   pipeable_26_27: Pipeable<$Output_26, Result<$Output_27, $Error_27>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_27,
@@ -1789,7 +1792,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -1876,7 +1879,7 @@ export function pipe<
   pipeable_25_26: Pipeable<$Output_25, Result<$Output_26, $Error_26>>,
   pipeable_26_27: Pipeable<$Output_26, Result<$Output_27, $Error_27>>,
   pipeable_27_28: Pipeable<$Output_27, Result<$Output_28, $Error_28>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_28,
@@ -1914,7 +1917,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -2004,7 +2007,7 @@ export function pipe<
   pipeable_26_27: Pipeable<$Output_26, Result<$Output_27, $Error_27>>,
   pipeable_27_28: Pipeable<$Output_27, Result<$Output_28, $Error_28>>,
   pipeable_28_29: Pipeable<$Output_28, Result<$Output_29, $Error_29>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_29,
@@ -2043,7 +2046,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -2136,7 +2139,7 @@ export function pipe<
   pipeable_27_28: Pipeable<$Output_27, Result<$Output_28, $Error_28>>,
   pipeable_28_29: Pipeable<$Output_28, Result<$Output_29, $Error_29>>,
   pipeable_29_30: Pipeable<$Output_29, Result<$Output_30, $Error_30>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_30,
@@ -2176,7 +2179,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -2272,7 +2275,7 @@ export function pipe<
   pipeable_28_29: Pipeable<$Output_28, Result<$Output_29, $Error_29>>,
   pipeable_29_30: Pipeable<$Output_29, Result<$Output_30, $Error_30>>,
   pipeable_30_31: Pipeable<$Output_30, Result<$Output_31, $Error_31>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_31,
@@ -2313,7 +2316,7 @@ export function pipe<
     >
   >
 >;
-export function pipe<
+export function and<
   $Input,
   $Output_1,
   $Error_1 extends Error,
@@ -2412,7 +2415,7 @@ export function pipe<
   pipeable_29_30: Pipeable<$Output_29, Result<$Output_30, $Error_30>>,
   pipeable_30_31: Pipeable<$Output_30, Result<$Output_31, $Error_31>>,
   pipeable_31_32: Pipeable<$Output_31, Result<$Output_32, $Error_32>>,
-): Pipeable<
+): PipeableAsync<
   $Input,
   Result<
     $Output_32,
@@ -2455,10 +2458,10 @@ export function pipe<
   >
 >;
 /**
- * Pipeable which takes N number of pipeables and returns either `Ok` returned by the last pipeable or `Err` returned by any of the pipeables.
+ * Async pipeable which takes N number of sync or async pipeables and returns either `Ok` returned by the last pipeable or `Err` returned by any of the pipeables.
  *
  * @example
- * // Pipeable<number, Result<string, Error<"FILTER", number> | Error<"CUSTOM", number>>>
+ * // PipeableAsync<number, Result<string, Error<"FILTER", number> | Error<"CUSTOM", number>>>
  * const customPipe = pipe(
  *   filter((v: number) => !(v % 2)),
  *   wrap(
@@ -2466,15 +2469,15 @@ export function pipe<
  *     error("CUSTOM")
  *   ),
  * );
- * */
-export function pipe(...pipeables: Pipeable[]) {
+ **/
+export function and(...pipeables: Pipeable[]) {
   const length = pipeables.length;
 
-  return (value: unknown) => {
+  return async (value: unknown) => {
     let latest = value;
 
     for (let i = 0; i < length; ++i) {
-      const result = pipeables[i](latest);
+      const result = await pipeables[i](latest);
 
       if (isErr(result)) {
         return result;
@@ -2486,8 +2489,3 @@ export function pipe(...pipeables: Pipeable[]) {
     return ok(latest);
   };
 }
-
-/**
- * Alias for `pipe`.
- * */
-export const and = pipe;

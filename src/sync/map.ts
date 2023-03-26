@@ -1,16 +1,16 @@
 import { Result, ok } from "elfs";
-import { Error, Pipeable } from "../types";
+import { Error, PipeableSync } from "../types";
 
 /**
- * Pipeable which maps value from `$Input` to `Ok<$Output>`.
+ * Sync pipeable which maps value from `$Input` to `Ok<$Output>`.
  *
  * @example
- * // Pipeable<number, Result<string, Error>>
+ * // PipeableSync<number, Result<string, Error>>
  * const doubleString = map((v: number) => `${v * 2}`);
- * */
+ **/
 export function map<$Input, $Output>(
   fn: (value: $Input) => $Output,
-): Pipeable<$Input, Result<$Output, Error>> {
+): PipeableSync<$Input, Result<$Output, Error>> {
   return (value) => {
     return ok(fn(value));
   };

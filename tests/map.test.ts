@@ -1,5 +1,5 @@
 import { getOk, isOk } from "elfs";
-import { map } from "../src";
+import { map } from "../src/sync";
 
 describe("map", () => {
   const double = map((v: number) => v * 2);

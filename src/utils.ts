@@ -1,5 +1,5 @@
-import { ObjectAny, Fn, Result } from "elfs";
-import { Error, PipeableOutput } from "./types";
+import { ObjectAny, Fn } from "elfs";
+import { Error } from "./types";
 
 /**
  * Creates error tuple based on value and potential sub-error.
@@ -8,7 +8,7 @@ import { Error, PipeableOutput } from "./types";
  *
  * @example
  * error("TEST", (value, error) => ({ valueType: typeof value, error }))
- * */
+ **/
 export function error<
   $Reason extends string,
   $Input,
@@ -24,21 +24,4 @@ export function error<
         : {},
     ] as Error<$Reason, $Input, $Context>;
   };
-}
-
-/**
- * Allows to run `Pipeable` with `unknown` input while infering everything else from the `Pipeable` as usual.
- *
- * @example
- * const isStringOrNumber = pipe(...);
- * // ResultErr<["OR", [], { }]>
- * const result1 = parse(isStringOrNumber, []);
- * // ResultOk<1>
- * const result2 = parse(isStringOrNumber, 1);
- * */
-export function parse<$Result extends Result>(
-  pipeable: PipeableOutput<$Result>,
-  data: unknown,
-) {
-  return pipeable(data);
 }

@@ -1,28 +1,31 @@
 import { Either, Predicate, Result, ResultErr, ResultOk, err, ok } from "elfs";
-import { Error, Pipeable } from "../types";
+import { Error, PipeableSync } from "../types";
 import { error } from "../utils";
 
 export function filter<$Input>(
   predicate: Predicate<$Input>,
-): Pipeable<
+): PipeableSync<
   $Input,
   Either<[ResultOk<$Input>, ResultErr<Error<"FILTER", $Input>>]>
 >;
 export function filter<$Input, $TrueResult extends Result>(
   predicate: Predicate<$Input>,
-  truePipeable: Pipeable<$Input, $TrueResult>,
-): Pipeable<$Input, Either<[$TrueResult, ResultErr<Error<"FILTER", $Input>>]>>;
+  truePipeable: PipeableSync<$Input, $TrueResult>,
+): PipeableSync<
+  $Input,
+  Either<[$TrueResult, ResultErr<Error<"FILTER", $Input>>]>
+>;
 export function filter<
   $Input,
   $TrueResult extends Result,
   $FalseResult extends Result,
 >(
   predicate: Predicate<$Input>,
-  truePipeable: Pipeable<$Input, $TrueResult>,
-  falsePipeable: Pipeable<$Input, $FalseResult>,
-): Pipeable<$Input, Either<[$TrueResult, $FalseResult]>>;
+  truePipeable: PipeableSync<$Input, $TrueResult>,
+  falsePipeable: PipeableSync<$Input, $FalseResult>,
+): PipeableSync<$Input, Either<[$TrueResult, $FalseResult]>>;
 /**
- * Pipeable which runs either `truePipeable` or `falsePipeable` based on return value of `predicate`.
+ * Sync pipeable which runs either `truePipeable` or `falsePipeable` based on return value of `predicate`.
  *
  * By default `truePipeable` returns `Ok<$Input>` and `falsePipeable` returns `Err<Error<"FILTER", $Input>>`.
  *
@@ -39,24 +42,21 @@ export function filter<
  *   () => ok("even"),
  *   () => ok("odd"),
  * );
- * */
+ **/
 export function filter<
   $Input,
   $TrueResult extends Result,
   $FalseResult extends Result,
 >(
   predicate: Predicate<$Input>,
-  truePipeable?: Pipeable<$Input, $TrueResult>,
-  falsePipeable?: Pipeable<$Input, $FalseResult>,
+  truePipeable?: PipeableSync<$Input, $TrueResult>,
+  falsePipeable?: PipeableSync<$Input, $FalseResult>,
 ) {
   return (value: $Input) => {
     if (predicate(value)) {
-      return (
-        truePipeable ||
-        (((value) => ok(value)) as Pipeable<$Input, $TrueResult>)
-      )(value);
+      return truePipeable ? truePipeable(value) : ok(value);
     }
 
-    return (falsePipeable || ((value) => err(error("FILTER")(value))))(value);
+    return falsePipeable ? falsePipeable(value) : err(error("FILTER")(value));
   };
 }

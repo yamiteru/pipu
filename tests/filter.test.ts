@@ -1,5 +1,5 @@
 import { getOk, isErr, isOk, ok } from "elfs";
-import { filter } from "../src";
+import { filter } from "../src/sync";
 
 describe("filter", () => {
   const isEvenDefault = filter((v: number) => !(v % 2));

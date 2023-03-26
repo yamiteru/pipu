@@ -1,16 +1,17 @@
 import { err, getErr, getOk, isErr, isOk, ok } from "elfs";
-import { error, pipe } from "../src";
+import { and } from "../src/sync";
+import { error } from "../src";
 
 describe("Pipe", () => {
   it("should create callable pipe", () => {
-    const testPipe = pipe((v: number) => ok(v * 2));
+    const testPipe = and((v: number) => ok(v * 2));
 
     expect(testPipe).toBeDefined();
     expect(typeof testPipe).toBe("function");
   });
 
   it("should execute all methods and return Ok", () => {
-    const testPipe = pipe(
+    const testPipe = and(
       (v: number) => ok(v * 2),
       (v) => ok(`${v}`),
     );
@@ -22,7 +23,7 @@ describe("Pipe", () => {
   });
 
   it("should stop execution and return Error", () => {
-    const testPipe = pipe(
+    const testPipe = and(
       (v: number) => (!(v % 2) ? ok(v) : err(error("TEST")(v))),
       (v) => ok(`${v}`),
     );

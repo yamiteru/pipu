@@ -1,9 +1,13 @@
-> Powerful TypeScript pipes with focus on size, performance and modularity.
+# Pipu
+
+Powerful TypeScript a/sync pipes with focus on size, performance and modularity.
+
+## Installation
 
 ---
 
-```shell
-yarn add pipu
+```bash
+yarn add pipu # npm install pipu
 ```
 
 ---
@@ -85,9 +89,17 @@ const customPipe = or(
 );
 ```
 
-### pipe
+### resolve
 
-Pipe is just `and`.
+Async pipeable which tries to resolve a promise and return `ResultOk`.
+
+```ts
+// PipeableAsync<number, Result<number, Error<"PROMISE", number>>>
+const getUsersByAge = and(
+  filter((age: number) => age > 18),
+  resolve((age) => api.getUsersByAge(age)),
+);
+```
 
 ---
 
@@ -116,13 +128,6 @@ const result1 = parse(isStringOrNumber, []);
 // ResultOk<1>
 const result2 = parse(isStringOrNumber, 1);
 ```
-
----
-
-## Limitations
-
-1. `and`/`pipe` and `or` can take _only_ up to 32 `Pipeable`s
-2. It's still not very clear how to do async `Pipeable`s
 
 ---
 

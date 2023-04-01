@@ -1,6 +1,7 @@
+import { describe, expect, it } from "vitest";
 import { getOk, isErr, isOk } from "elfs";
 import { or } from "../../src/async";
-import {filter} from "../../src/sync";
+import { filter } from "../../src/sync";
 
 describe("async/or", () => {
   const isDividableByTwoOrThree = or(

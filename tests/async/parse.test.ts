@@ -1,7 +1,8 @@
-import {getErr, getOk, isErr, isOk} from "elfs";
-import {error} from "../../src";
-import {parse} from "../../src/async";
-import {filter, map} from "../../src/sync";
+import { describe, expect, it } from "vitest";
+import { getErr, getOk, isErr, isOk } from "elfs";
+import { error } from "../../src";
+import { parse } from "../../src/async";
+import { filter, map } from "../../src/sync";
 
 describe("async/parse", () => {
   const double = map((v: number) => v * 2);

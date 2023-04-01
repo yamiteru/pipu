@@ -1,6 +1,7 @@
+import { describe, expect, it } from "vitest";
 import { getErr, getOk, isErr, isOk } from "elfs";
 import { error } from "../../src";
-import {wrap} from "../../src/async";
+import { wrap } from "../../src/async";
 import { filter } from "../../src/sync";
 
 describe("async/wrap", () => {

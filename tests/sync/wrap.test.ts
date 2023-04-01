@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { getErr, getOk, isErr, isOk } from "elfs";
 import { error } from "../../src";
 import { wrap, filter } from "../../src/sync";

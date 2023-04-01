@@ -1,7 +1,9 @@
 import { suite, useTerminal } from "isitfast";
-import {resolve} from "../src/async";
+import { resolve } from "../src/async";
 
-const pipuResolve = resolve((v: number) => new Promise<number>((resolve) => resolve(v)));
+const pipuResolve = resolve(
+  (v: number) => new Promise<number>((resolve) => resolve(v)),
+);
 
 const test = suite("resolve", {
   pipu_resolve: async () => {

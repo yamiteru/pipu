@@ -1,5 +1,5 @@
 import { suite, useTerminal } from "isitfast";
-import {filter} from "../src/sync";
+import { filter } from "../src/sync";
 
 const pipuFilter = filter((v: number) => !(v % 2));
 

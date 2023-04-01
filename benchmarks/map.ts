@@ -1,5 +1,5 @@
 import { suite, useTerminal } from "isitfast";
-import {map} from "../src/sync";
+import { map } from "../src/sync";
 
 const pipuMap = map((v: number) => v * 2);
 

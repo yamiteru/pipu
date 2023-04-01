@@ -1,4 +1,4 @@
-import {map, parse} from "../src/sync";
+import { map, parse } from "../src/sync";
 
 export const double = map((v: number) => v * 2);
 

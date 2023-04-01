@@ -1,4 +1,4 @@
-import {and, filter} from "../src/sync";
+import { and, filter } from "../src/sync";
 
 export const ageFilter = and(
   filter((v: number) => v >= 1),

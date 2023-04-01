@@ -1,6 +1,6 @@
 import { Result, ok, err } from "elfs";
 import { Error, PipeableSync } from "../types";
-import {error} from "../utils";
+import { error } from "../utils";
 
 /**
  * Sync pipeable which maps value from `$Input` to `Ok<$Output>`.

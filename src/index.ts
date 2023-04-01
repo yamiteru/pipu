@@ -1,5 +1,18 @@
-import {andAsync, orAsync, parseAsync, resolveAsync, wrapAsync} from "./async";
-import {andSync, filterSync, mapSync, orSync, parseSync, wrapeSync} from "./sync";
+import {
+  andAsync,
+  orAsync,
+  parseAsync,
+  resolveAsync,
+  wrapAsync,
+} from "./async";
+import {
+  andSync,
+  filterSync,
+  mapSync,
+  orSync,
+  parseSync,
+  wrapeSync,
+} from "./sync";
 
 export * from "./types";
 export * from "./utils";
@@ -9,7 +22,7 @@ export const async = {
   or: orAsync,
   parse: parseAsync,
   resolve: resolveAsync,
-  wrap: wrapAsync
+  wrap: wrapAsync,
 };
 
 export const sync = {
@@ -18,5 +31,5 @@ export const sync = {
   parse: parseSync,
   wrap: wrapeSync,
   filter: filterSync,
-  map: mapSync
+  map: mapSync,
 };

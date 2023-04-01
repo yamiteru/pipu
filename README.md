@@ -1,6 +1,6 @@
 # Pipu
 
-🔥 hellishly fast and 🤏 tiny async/sync pipe operator for typescript.
+🔥 hellishly fast, 🤏 tiny and 🤖 modular async/sync pipe toolkit for typescript.
 
 ---
 

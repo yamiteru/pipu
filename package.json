@@ -27,7 +27,7 @@
     "dist/**/*.ts"
   ],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
-  "description": "🔥 hellishly fast and 🤏 tiny async/sync pipe operator for typescript.",
+  "description": "🔥 hellishly fast, 🤏 tiny and 🤖 modular async/sync pipe toolkit for typescript.",
   "repository": {
     "type": "git",
     "url": "https://github.com/yamiteru/pipu.git",

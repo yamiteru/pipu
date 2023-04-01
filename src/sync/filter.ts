@@ -49,16 +49,13 @@ export function filter<
   $FalseResult extends Result,
 >(
   predicate: Predicate<$Input>,
-  truePipeable?: PipeableSync<$Input, $TrueResult>,
-  falsePipeable?: PipeableSync<$Input, $FalseResult>,
+  truePipeable: PipeableSync<$Input, $TrueResult> = ((value: $Input) =>
+    ok(value)) as PipeableSync<$Input, $TrueResult>,
+  falsePipeable: PipeableSync<$Input, $FalseResult> = ((value: $Input) =>
+    err(error("FILTER")(value))) as PipeableSync<$Input, $FalseResult>,
 ) {
-   return (value: $Input) => {
-    if (predicate(value)) {
-      return truePipeable ? truePipeable(value) : ok(value);
-    }
-
-    return falsePipeable ? falsePipeable(value) : err(error("FILTER")(value));
-  };
+  return (value: $Input) =>
+    predicate(value) ? truePipeable(value) : falsePipeable(value);
 }
 
 export const filterSync = filter;

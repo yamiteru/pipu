@@ -2,11 +2,10 @@
   "compilerOptions": {
     "strict": true,
     "target": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "declaration": true,
-    "resolveJsonModule": true,
-    "noImplicitAny": false
+    "noImplicitAny": true
   },
   "exclude": ["node_modules"]
 }

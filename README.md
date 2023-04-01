@@ -1,5 +1,13 @@
+# Pipu
+
+🔥 hellishly fast and 🤏 tiny async/sync pipe operator for typescript.
+
+---
+
+## Installation
+
 ```bash
-yarn add pipu # npm install pipu
+yarn add pipu # pnpm add pipu
 ```
 
 ---

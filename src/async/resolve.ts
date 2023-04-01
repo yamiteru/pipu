@@ -16,12 +16,21 @@ import { error } from "../utils";
  **/
 export function resolve<$Input, $Result>(
   fn: (value: $Input) => Promise<$Result>,
-): PipeableAsync<$Input, Result<$Result, Error<"PROMISE", $Input>>> {
+): PipeableAsync<
+  $Input,
+  Result<$Result, Error<"PROMISE", $Input, { error: unknown }>>
+> {
   return async (value: $Input) => {
     try {
       return ok(await fn(value));
-    } catch {
-      return err(error("PROMISE")(value) as Error<"PROMISE", $Input>);
+    } catch (e) {
+      return err(
+        error("PROMISE", () => ({ error: e }))(value) as Error<
+          "PROMISE",
+          $Input,
+          { error: unknown }
+        >,
+      );
     }
   };
 }

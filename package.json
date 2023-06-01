@@ -11,14 +11,14 @@
       "require": "./dist/index.cjs.js"
     },
     "./sync": {
-      "types": "./dist/sync.d.ts",
-      "import": "./dist/sync.mjs.js",
-      "require": "./dist/sync.cjs.js"
+      "types": "./dist/sync/index.d.ts",
+      "import": "./dist/sync/index.mjs.js",
+      "require": "./dist/sync/index.cjs.js"
     },
     "./async": {
-      "types": "./dist/async.d.ts",
-      "import": "./dist/async.mjs.js",
-      "require": "./dist/async.cjs.js"
+      "types": "./dist/async/index.d.ts",
+      "import": "./dist/async/index.mjs.js",
+      "require": "./dist/async/index.cjs.js"
     }
   },
   "files": [

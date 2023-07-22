@@ -1,6 +1,6 @@
 {
   "name": "pipu",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",

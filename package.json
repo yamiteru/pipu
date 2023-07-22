@@ -2,29 +2,34 @@
   "name": "pipu",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/index.cjs.js",
+  "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs.js",
-      "require": "./dist/index.cjs.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
     "./sync": {
       "types": "./dist/sync/index.d.ts",
-      "import": "./dist/sync/index.mjs.js",
-      "require": "./dist/sync/index.cjs.js"
+      "import": "./dist/sync/index.mjs",
+      "require": "./dist/sync/index.cjs"
     },
     "./async": {
       "types": "./dist/async/index.d.ts",
-      "import": "./dist/async/index.mjs.js",
-      "require": "./dist/async/index.cjs.js"
+      "import": "./dist/async/index.mjs",
+      "require": "./dist/async/index.cjs"
     }
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.map",
-    "dist/**/*.ts"
+    "!dist/benchmarks/",
+    "!dist/tests/",
+    "!dist/examples/",
+    "!dist/scripts/",
+    "dist/*.cjs",
+    "dist/*.mjs",
+    "dist/*.map",
+    "dist/*.ts"
   ],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
   "description": "🔥 hellishly fast, 🤏 tiny and 🤖 modular async/sync pipe toolkit for typescript.",
@@ -77,7 +82,6 @@
     "@vitest/coverage-c8": "0.29.8",
     "auto-changelog": "2.4.0",
     "esbuild": "0.17.14",
-    "esbuild-plugin-swc": "1.0.1",
     "eslint": "8.37.0",
     "eslint-config-prettier": "8.8.0",
     "husky": "8.0.3",

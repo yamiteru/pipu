@@ -4,7 +4,7 @@ import { Error, Pipeable, PipeableAsync } from "../types";
 /**
  * Async pipeable which wraps async pipeable and overrides its `Error`.
  *
- * It's recommended to `error` function to create a custom `Error`.
+ * It's recommended to use `error` function to create a custom `Error`.
  *
  * @example
  * // PipeableAsync<number, Result<number, Error<"CUSTOM", number>>>

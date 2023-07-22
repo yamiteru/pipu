@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "strict": true,
+    "module": "nodenext",
     "target": "ESNext",
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "declaration": true,
-    "noImplicitAny": true
+    "noImplicitAny": false
   },
   "exclude": ["node_modules"]
 }

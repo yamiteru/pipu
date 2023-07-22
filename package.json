@@ -26,10 +26,10 @@
     "!dist/tests/",
     "!dist/examples/",
     "!dist/scripts/",
-    "dist/*.cjs",
-    "dist/*.mjs",
-    "dist/*.map",
-    "dist/*.ts"
+    "dist/**/*.cjs",
+    "dist/**/*.mjs",
+    "dist/**/*.map",
+    "dist/**/*.ts"
   ],
   "author": "Miroslav Vrsecky <yamiteru@icloud.com>",
   "description": "🔥 hellishly fast, 🤏 tiny and 🤖 modular async/sync pipe toolkit for typescript.",
